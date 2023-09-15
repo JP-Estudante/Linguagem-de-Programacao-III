@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" prefHeight="377.0" prefWidth="507.0" spacing="20.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.aceitartermosbutton.PrimaryController">
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+   <children>
+      <Pane prefHeight="358.0" prefWidth="487.0">
+         <children>
+            <TextArea fx:id="termoArea" editable="false" layoutX="7.0" layoutY="9.0" prefHeight="239.0" prefWidth="451.0" text="**TERMOS DE SERVIÇO**&#10;&#10;**Última atualização: [Data da última atualização]**&#10;&#10;Bem-vindo aos Termos de Serviço do [Nome do Aplicativo]!&#10;&#10;Estes Termos de Serviço (&quot;Termos&quot;) constituem um acordo legal entre você (&quot;Usuário&quot; ou &quot;você&quot;) e [Nome da Empresa], uma entidade legal (&quot;nós&quot;, &quot;nossa&quot; ou &quot;nosso&quot;) que regula o uso do nosso aplicativo móvel [Nome do Aplicativo] (&quot;Aplicativo&quot;). Ao acessar ou usar nosso Aplicativo, você concorda em cumprir e estar vinculado a estes Termos.&#10;&#10;**1. Aceitação dos Termos**&#10;&#10;Ao acessar ou usar nosso Aplicativo, você concorda com estes Termos. Se você não concordar com qualquer disposição destes Termos, não está autorizado a usar nosso Aplicativo.&#10;&#10;**2. Uso do Aplicativo**&#10;&#10;2.1. **Registro da Conta**: Para usar determinadas funcionalidades do Aplicativo, você pode ser solicitado a criar uma conta. Você é responsável por manter a confidencialidade de suas credenciais de login e por todas as atividades que ocorram em sua conta.&#10;&#10;2.2. **Uso Adequado**: Você concorda em usar nosso Aplicativo de acordo com todas as leis e regulamentos aplicáveis e de forma ética. Você não deve usar o Aplicativo para fins ilegais, difamatórios, abusivos ou de qualquer forma que viole os direitos de terceiros.&#10;&#10;2.3. **Atualizações**: Podemos atualizar ou modificar o Aplicativo periodicamente para melhorar sua funcionalidade. Você concorda em manter seu Aplicativo atualizado para receber os benefícios das últimas atualizações.&#10;&#10;**3. Privacidade**&#10;&#10;Para entender como coletamos, usamos e protegemos suas informações pessoais, consulte nossa Política de Privacidade [Inserir Link para a Política de Privacidade].&#10;&#10;**4. Propriedade Intelectual**&#10;&#10;Todos os direitos de propriedade intelectual relacionados ao Aplicativo, incluindo direitos autorais, marcas registradas e patentes, pertencem a [Nome da Empresa]. Você não tem permissão para copiar, modificar, distribuir ou criar obras derivadas do Aplicativo.&#10;&#10;**5. Rescisão**&#10;&#10;Podemos rescindir ou suspender seu acesso ao Aplicativo a qualquer momento, por qualquer motivo, sem aviso prévio.&#10;&#10;**6. Limitação de Responsabilidade**&#10;&#10;Na medida máxima permitida por lei, [Nome da Empresa] não será responsável por quaisquer danos diretos, indiretos, incidentais, especiais, consequenciais ou punitivos decorrentes do uso ou da incapacidade de usar o Aplicativo.&#10;&#10;**7. Disposições Gerais**&#10;&#10;7.1. **Lei Aplicável**: Estes Termos são regidos pelas leis do [Inserir País], sem considerar conflitos de princípios legais.&#10;&#10;7.2. **Resolução de Conflitos**: Qualquer disputa relacionada a estes Termos será resolvida por meio de arbitragem vinculativa de acordo com as regras de arbitragem [Inserir Nome da Instituição de Arbitragem]. Cada parte arcará com seus próprios custos legais.&#10;&#10;7.3. **Modificações**: Reservamos o direito de modificar estes Termos a qualquer momento. As alterações entrarão em vigor imediatamente após a publicação dos Termos atualizados no Aplicativo. O uso continuado do Aplicativo após tais alterações constituirá aceitação dos Termos revisados.&#10;&#10;Estes Termos de Serviço representam o acordo completo entre você e [Nome da Empresa] em relação ao uso do Aplicativo. Se você tiver alguma dúvida sobre estes Termos, entre em contato conosco em [Inserir Endereço de Contato].&#10;&#10;Obrigado por escolher [Nome do Aplicativo]!&#10;&#10;[Assinatura da Empresa]&#10;[Nome da Empresa]&#10;[Endereço da Empresa]&#10;[Email da Empresa]&#10;[Telefone da Empresa]" />
+            <GridPane layoutX="14.0" layoutY="265.0" prefHeight="58.0" prefWidth="451.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="293.0" minWidth="10.0" prefWidth="275.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="219.0" minWidth="10.0" prefWidth="176.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="49.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="25.0" minHeight="8.0" prefHeight="9.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <CheckBox fx:id="concordoButton" mnemonicParsing="false" onAction="#concordoButtonClicked" prefHeight="18.0" prefWidth="285.0" text="Concordo e li os termos de serviços" />
+                  <Button fx:id="proximoButton" disable="true" mnemonicParsing="false" onAction="#proximoButtonClicked" text="Proximo" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+                  <Button fx:id="selecionarButton" mnemonicParsing="false" onAction="#selecionarButtonClicked" prefWidth="87.0" text="Selecionar" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BASELINE">
+                     <GridPane.margin>
+                        <Insets bottom="20.0" />
+                     </GridPane.margin>
+                  </Button>
+                  <Button fx:id="copiarButton" mnemonicParsing="false" onAction="#copiarButtonClicked" text="Copiar" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BASELINE">
+                     <GridPane.margin>
+                        <Insets bottom="20.0" />
+                     </GridPane.margin>
+                  </Button>
+               </children>
+            </GridPane>
+         </children>
+      </Pane>
+   </children>
+</VBox>
