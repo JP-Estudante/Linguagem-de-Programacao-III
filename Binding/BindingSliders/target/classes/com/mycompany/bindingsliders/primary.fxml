@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" prefHeight="1004.0" prefWidth="240.0" spacing="20.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.bindingsliders.PrimaryController">
+   <children>
+      <Label text="Slide" />
+      <HBox prefHeight="979.0" prefWidth="200.0">
+         <children>
+            <Slider fx:id="slider1" orientation="VERTICAL">
+               <opaqueInsets>
+                  <Insets right="50.0" />
+               </opaqueInsets>
+            </Slider>
+            <Label fx:id="label1" />
+            <Slider fx:id="slider2" orientation="VERTICAL" prefHeight="542.0" prefWidth="16.0">
+               <opaqueInsets>
+                  <Insets left="50.0" />
+               </opaqueInsets>
+            </Slider>
+         </children>
+      </HBox>
+   </children>
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+</VBox>
