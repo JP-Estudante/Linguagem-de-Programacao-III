@@ -1,0 +1,112 @@
+/* Estilo básico para botões */
+.button {
+    -fx-background-color: #f4a261;
+    -fx-background-radius: 5;
+    -fx-border-width: 1;
+    -fx-padding: 10 20;
+    -fx-font-family: "Segoe UI Symbol";
+    -fx-font-size: 24px;
+}
+
+/* Estilo para botões quando o mouse passa por cima deles */
+.button:hover {
+    -fx-background-color: #84a98c; /* Altere a cor de fundo quando o mouse passa por cima */
+    -fx-text-fill: #354f52; /* Altere a cor do texto quando o mouse passa por cima */
+}
+
+/* Estilo para o ToggleButton no estado normal */
+.toggle-button {
+    -fx-background-color: #52796f;
+    -fx-background-radius: 5;
+    -fx-font-family: "Segoe UI Symbol";
+    -fx-font-size: 16px;
+}
+
+/* Estilo para o ToggleButton no estado pressionado (selected) */
+.toggle-button:selected {
+    -fx-background-color: #52796f; /* Mantém a mesma cor de fundo */
+}
+
+/* Estilo para a TableView */
+.table-view {
+    -fx-control-inner-background: #CAD2C5; /* Cor de fundo do item selecionado */
+    -fx-table-cell-border-color: #CAD2C5; /* Remove a borda entre as células */
+    -fx-selection-bar: #CAD2C5; /* Cor de fundo da barra de seleção */
+    -fx-background-color: #CAD2C5; /* Fundo transparente */
+}
+
+/* Estilo para as células da TableView */
+.table-cell {
+    -fx-padding: 10; /* Espaçamento interno */
+    -fx-font-size: 16px; /* Tamanho da fonte */
+}
+
+/* Estilo para as células da TableView quando estão selecionadas */
+.table-cell:selected {
+    -fx-background-color: #CAD2C5; /* Cor de fundo quando selecionado */
+    -fx-text-fill: #fcbf49; /* Cor do texto quando selecionado */
+}
+
+/* Estilo para as colunas da TableView */
+.table-column {
+    -fx-padding: 10; /* Espaçamento interno */
+    -fx-text-fill: #354f52; /* Cor do texto das colunas */
+    -fx-font-size: 16px; /* Tamanho da fonte */
+}
+
+/* Estilo para o cabeçalho das colunas da TableView */
+.table-view .column-header-background {
+    -fx-background-color: #52796f; /* Cor de fundo do cabeçalho */
+    -fx-text-fill: #fcbf49; /* Cor do texto do cabeçalho */
+    -fx-font-size: 16px; /* Tamanho da fonte do cabeçalho */
+}
+
+
+/* Estilo para HBox com a cor #f4a261 */
+.hbox-com-cor {
+    -fx-background-color: #f4a261;
+}
+
+/* Estilo personalizado para os labels do caixa */
+.checkout-values {
+    -fx-font-size: 26px; /* Tamanho da fonte */
+    -fx-font-family: "Segoe UI Symbol"; /* Nome da fonte */
+    -fx-font-weight: bold; /* Estilo da fonte (normal, bold, etc.) */
+
+}
+
+/* Estilo personalizado para os textField do caixa*/
+.checkout-values-field {
+-fx-background-radius: 5;
+-fx-border-color: #84A98C;
+-fx-background-color: #52796f;
+-fx-border-width: 1;
+-fx-border-radius: 5;
+-fx-padding: 5;
+-fx-effect: innershadow(3px 3px 5px rgba(0, 0, 0, 0.1));
+}
+
+/* Estilo para o TextField do codigo de barras */
+.bar-code {
+    -fx-background-color: #52796F;
+    -fx-font-family: "Segoe UI Symbol";
+    -fx-font-size: 32px;
+    -fx-background-radius: 5;
+    -fx-border-color: #84A98C;
+    -fx-border-width: 1;
+    -fx-border-radius: 5;
+    -fx-padding: 5;
+    -fx-effect: innershadow(3px 3px 5px rgba(0, 0, 0, 0.1));
+}
+
+.menu-collor-light {
+    -fx-background-color: #52796f;
+}
+
+.menu-collor-solid{
+    -fx-background-color: #354F52;
+}
+
+.font-collor {
+    -fx-text-fill: #fcbf49;
+}

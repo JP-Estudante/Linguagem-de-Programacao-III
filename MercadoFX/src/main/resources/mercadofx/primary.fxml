@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="600.0" minWidth="800.0" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mercadofx.PrimaryController">
+   <left>
+      <AnchorPane prefHeight="864.0" prefWidth="300.0" styleClass="menu-collor-light" stylesheets="@../css/style.css" BorderPane.alignment="CENTER">
+         <children>
+            <VBox layoutX="11.0" prefHeight="370.0" prefWidth="277.0">
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="55.0" prefWidth="344.0" text="Finalizar Cupom">
+                     <styleClass>
+                        <String fx:value="menu-collor-light" />
+                        <String fx:value="button" />
+                        <String fx:value="font-collor" />
+                     </styleClass>
+                     <graphic>
+                        <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/finish-icon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button mnemonicParsing="false" prefHeight="55.0" prefWidth="316.0" text="Cancelar ult. item">
+                     <styleClass>
+                        <String fx:value="menu-collor-light" />
+                        <String fx:value="font-collor" />
+                     </styleClass>
+                     <graphic>
+                        <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/cancel-icon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <VBox.margin>
+                        <Insets top="50.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" prefHeight="55.0" prefWidth="307.0" text="Cancelar item esp." textAlignment="JUSTIFY">
+                     <styleClass>
+                        <String fx:value="menu-collor-light" />
+                        <String fx:value="font-collor" />
+                     </styleClass>
+                     <graphic>
+                        <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/cancel-icon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <VBox.margin>
+                        <Insets top="50.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" prefHeight="55.0" prefWidth="344.0" text="Cancelar Cupom">
+                     <styleClass>
+                        <String fx:value="menu-collor-light" />
+                        <String fx:value="font-collor" />
+                     </styleClass>
+                     <graphic>
+                        <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/cancel-icon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <VBox.margin>
+                        <Insets top="50.0" />
+                     </VBox.margin></Button>
+               </children>
+            </VBox>
+            <Text fill="#0d99e4" layoutX="32.0" layoutY="807.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Check">
+               <font>
+                  <Font name="Segoe UI Italic" size="28.0" />
+               </font>
+            </Text>
+            <Text fill="#e1c510" layoutX="107.0" layoutY="808.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 22; -fx-font-family: Impact;" text="Out" wrappingWidth="36.13671875">
+               <font>
+                  <Font name="Segoe UI Italic" size="28.0" />
+               </font>
+            </Text>
+            <Text fill="#0d99e4" layoutX="138.0" layoutY="808.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Xpress" wrappingWidth="90.13671875">
+               <font>
+                  <Font name="Segoe UI Italic" size="28.0" />
+               </font>
+            </Text>
+            <Text fill="#fafbfc" layoutX="135.0" layoutY="831.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sistemas">
+               <font>
+                  <Font name="Segoe UI Italic" size="20.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+   </left>
+   <top>
+      <AnchorPane prefHeight="141.0" prefWidth="784.0" styleClass="menu-collor-solid" stylesheets="@../css/style.css" BorderPane.alignment="CENTER">
+         <children>
+            <Text layoutX="1643.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: Segoe UI Symbol; -fx-font-size: 30; -fx-fill: #84A98C; -fx-font-weight: bold; -fx-font-style: italic;" text="Caixa Rápido" wrappingWidth="190.4609375" />
+            <Text layoutX="757.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: Impact; -fx-font-size: 40; -fx-fill: #fcbf49;" text="Ritmo &amp; Sabor Emporium" wrappingWidth="405.24609375" />
+         </children>
+      </AnchorPane>
+   </top>
+   <right>
+      <AnchorPane prefHeight="613.0" prefWidth="520.0" styleClass="menu-collor-solid" stylesheets="@../css/style.css" BorderPane.alignment="CENTER">
+         <children>
+            <GridPane layoutX="104.0" layoutY="150.0" prefHeight="277.0" prefWidth="312.0" styleClass="label-valores-caixa">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="146.0" minWidth="10.0" prefWidth="146.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="177.0" minWidth="10.0" prefWidth="171.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="94.0" minHeight="10.0" prefHeight="90.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="120.0" minHeight="10.0" prefHeight="98.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="133.0" minHeight="10.0" prefHeight="88.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label text="Valor Unt.:" GridPane.rowIndex="1">
+                     <styleClass>
+                        <String fx:value="checkout-values" />
+                        <String fx:value="font-collor" />
+                     </styleClass>
+                  </Label>
+                  <Label text="Valor Total:" GridPane.rowIndex="2">
+                     <styleClass>
+                        <String fx:value="checkout-values" />
+                        <String fx:value="font-collor" />
+                     </styleClass>
+                  </Label>
+                  <Label text="Quantidade:">
+                     <styleClass>
+                        <String fx:value="checkout-values" />
+                        <String fx:value="font-collor" />
+                     </styleClass>
+                  </Label>
+                  <TextField alignment="CENTER" editable="false" prefHeight="50.0" prefWidth="36.0" text="2" GridPane.columnIndex="1">
+                     <styleClass>
+                        <String fx:value="checkout-values" />
+                        <String fx:value="checkout-values-field" />
+                        <String fx:value="font-collor" />
+                     </styleClass>
+                     <GridPane.margin>
+                        <Insets right="120.0" />
+                     </GridPane.margin>
+                  </TextField>
+                  <TextField editable="false" prefHeight="39.0" prefWidth="101.0" text="R$ 60,00" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <styleClass>
+                        <String fx:value="checkout-values" />
+                        <String fx:value="checkout-values-field" />
+                        <String fx:value="font-collor" />
+                     </styleClass>
+                     <GridPane.margin>
+                        <Insets right="35.0" />
+                     </GridPane.margin>
+                  </TextField>
+                  <TextField editable="false" text="R$ 30,00" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <styleClass>
+                        <String fx:value="checkout-values" />
+                        <String fx:value="checkout-values-field" />
+                        <String fx:value="font-collor" />
+                     </styleClass>
+                     <GridPane.margin>
+                        <Insets right="35.0" />
+                     </GridPane.margin>
+                  </TextField>
+               </children>
+            </GridPane>
+            <TextField layoutX="153.0" layoutY="735.0" prefHeight="62.0" prefWidth="274.0" text="7897546982347">
+               <styleClass>
+                  <String fx:value="bar-code" />
+                  <String fx:value="font-collor" />
+               </styleClass>
+            </TextField>
+            <ToggleButton fx:id="toggleCodRef" layoutX="86.0" layoutY="741.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="59.0" text="Cód.:">
+               <styleClass>
+                  <String fx:value="font-collor" />
+                  <String fx:value="toggle-button" />
+               </styleClass>
+            </ToggleButton>
+         </children>
+      </AnchorPane>
+   </right>
+   <bottom>
+      <AnchorPane prefHeight="75.0" prefWidth="1352.0" styleClass="menu-collor-light" stylesheets="@../css/style.css" BorderPane.alignment="CENTER">
+         <children>
+            <Text layoutX="609.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: Impact; -fx-font-size: 40; -fx-fill: #84A98C;" text="Status..." textAlignment="CENTER" wrappingWidth="701.24609375" />
+         </children>
+      </AnchorPane>
+   </bottom>
+   <center>
+      <TableView fx:id="tabelaProdutos" prefHeight="200.0" prefWidth="200.0" stylesheets="@../css/style.css" BorderPane.alignment="CENTER">
+        <columns>
+          <TableColumn fx:id="colunaItem" prefWidth="135.0" styleClass=".table-view" text="Item" />
+          <TableColumn fx:id="colunaDescricao" prefWidth="213.0" styleClass=".table-view" text="Descrição Produto" />
+            <TableColumn fx:id="colunaQuantidade" prefWidth="197.0" styleClass=".table-view" text="Quantidades" />
+            <TableColumn fx:id="colunaValorUnitario" minWidth="0.0" prefWidth="196.0" styleClass=".table-view" text="Valor Unitário" />
+            <TableColumn fx:id="colunaValorTotal" minWidth="0.0" prefWidth="195.0" styleClass=".table-view" text="Valor Total" />
+        </columns>
+         <styleClass>
+            <String fx:value="table-cell" />
+            <String fx:value="font-collor" />
+            <String fx:value="table-column" />
+         </styleClass>
+      </TableView>
+   </center>
+</BorderPane>
