@@ -1,0 +1,6 @@
+com/mycompany/dao/ContactsDAO.class
+com/mycompany/databaseconnectiontest/SQLiteDBManager.class
+com/mycompany/databaseconnectiontest/DataBaseConnectionTest.class
+module-info.class
+com/mycompany/model/Group.class
+com/mycompany/model/Contact.class
