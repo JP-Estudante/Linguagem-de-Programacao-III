@@ -1,6 +1,13 @@
-/home/labin-linux/Documentos/LP - III/EXEMPLOS/DataBaseConnectionTest/src/main/java/module-info.java
+/home/labin-linux/Documentos/LP - III/EXEMPLOS/DataBaseConnectionTest/src/main/java/com/mycompany/databaseconnectiontest/D_EditarContato.java
+/home/labin-linux/Documentos/LP - III/EXEMPLOS/DataBaseConnectionTest/src/main/java/com/mycompany/databaseconnectiontest/B_InserirContato.java
+/home/labin-linux/Documentos/LP - III/EXEMPLOS/DataBaseConnectionTest/src/main/java/com/mycompany/databaseconnectiontest/A_TesteConexaoBD.java
 /home/labin-linux/Documentos/LP - III/EXEMPLOS/DataBaseConnectionTest/src/main/java/com/mycompany/databaseconnectiontest/DataBaseConnectionTest.java
+/home/labin-linux/Documentos/LP - III/EXEMPLOS/DataBaseConnectionTest/src/main/java/com/mycompany/databaseconnectiontest/SQLiteDBManager.java
+/home/labin-linux/Documentos/LP - III/EXEMPLOS/DataBaseConnectionTest/src/main/java/com/mycompany/databaseconnectiontest/C_PegarContatoPorId.java
+/home/labin-linux/Documentos/LP - III/EXEMPLOS/DataBaseConnectionTest/src/main/java/com/mycompany/databaseconnectiontest/F_PegarContatos.java
+/home/labin-linux/Documentos/LP - III/EXEMPLOS/DataBaseConnectionTest/src/main/java/com/mycompany/model/Group.java
+/home/labin-linux/Documentos/LP - III/EXEMPLOS/DataBaseConnectionTest/src/main/java/com/mycompany/databaseconnectiontest/E_DeletarContato.java
+/home/labin-linux/Documentos/LP - III/EXEMPLOS/DataBaseConnectionTest/src/main/java/com/mycompany/dao/GroupDAO.java
+/home/labin-linux/Documentos/LP - III/EXEMPLOS/DataBaseConnectionTest/src/main/java/module-info.java
 /home/labin-linux/Documentos/LP - III/EXEMPLOS/DataBaseConnectionTest/src/main/java/com/mycompany/dao/ContactsDAO.java
 /home/labin-linux/Documentos/LP - III/EXEMPLOS/DataBaseConnectionTest/src/main/java/com/mycompany/model/Contact.java
-/home/labin-linux/Documentos/LP - III/EXEMPLOS/DataBaseConnectionTest/src/main/java/com/mycompany/databaseconnectiontest/SQLiteDBManager.java
-/home/labin-linux/Documentos/LP - III/EXEMPLOS/DataBaseConnectionTest/src/main/java/com/mycompany/model/Group.java

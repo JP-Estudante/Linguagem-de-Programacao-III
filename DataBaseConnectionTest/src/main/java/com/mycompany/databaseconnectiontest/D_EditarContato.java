@@ -1,15 +1,18 @@
+
 package com.mycompany.databaseconnectiontest;
 
 import com.mycompany.dao.ContactsDAO;
 import com.mycompany.model.Contact;
 import java.sql.SQLException;
 
-public class DataBaseConnectionTest {
 
+public class D_EditarContato {
+    
     public static void main(String[] args) throws SQLException {
         ContactsDAO contactDao = new ContactsDAO();
         Contact contato = contactDao.getById(1);
-        System.out.println(contato);
-        
+        contato.setFirstName("Maria novo");
+        contactDao.update(contato);
     }
+    
 }

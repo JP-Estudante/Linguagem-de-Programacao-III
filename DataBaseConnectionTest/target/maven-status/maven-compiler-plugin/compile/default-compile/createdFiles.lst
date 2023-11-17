@@ -1,6 +1,13 @@
-com/mycompany/dao/ContactsDAO.class
 com/mycompany/databaseconnectiontest/SQLiteDBManager.class
 com/mycompany/databaseconnectiontest/DataBaseConnectionTest.class
-module-info.class
 com/mycompany/model/Group.class
+com/mycompany/databaseconnectiontest/F_PegarContatos.class
+com/mycompany/databaseconnectiontest/B_InserirContato.class
+com/mycompany/databaseconnectiontest/D_EditarContato.class
+com/mycompany/databaseconnectiontest/C_PegarContatoPorId.class
+module-info.class
+com/mycompany/dao/GroupDAO.class
+com/mycompany/databaseconnectiontest/A_TesteConexaoBD.class
+com/mycompany/dao/ContactsDAO.class
 com/mycompany/model/Contact.class
+com/mycompany/databaseconnectiontest/E_DeletarContato.class
