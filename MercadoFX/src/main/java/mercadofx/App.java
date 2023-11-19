@@ -4,7 +4,6 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -22,8 +21,6 @@ public class App extends Application {
         //stage.getIcons().add(img);
 
         stage.setMaximized(true);
-        stage.setMinWidth(1600);
-        stage.setMinHeight(900);
 
         stage.show();
     }
