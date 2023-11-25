@@ -7,6 +7,11 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.Connection;
+
+import DAO.CategoriaDAO;
+import Models.Categoria;
+import db.ConnectionFactory;
 
 public class App extends Application {
 
@@ -14,11 +19,11 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        //Image img = new Image("src/main/resources/icons/logo-icon.png");
+        // Image img = new Image("src/main/resources/icons/logo-icon.png");
         scene = new Scene(loadFXML("primary"), 640, 480);
         stage.setScene(scene);
 
-        //stage.getIcons().add(img);
+        // stage.getIcons().add(img);
 
         stage.setMaximized(true);
 
