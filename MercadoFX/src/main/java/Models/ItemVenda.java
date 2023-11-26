@@ -8,7 +8,7 @@ public class ItemVenda {
     public ItemVenda(Produto produto, int quantidade) {
         this.produto = produto;
         this.quantidade = quantidade;
-        this.valorTotal = quantidade * produto.getValorUnitario();
+        this.valorTotal = quantidade * produto.getValorProduto();
     }
 
     public Produto getProduto() {

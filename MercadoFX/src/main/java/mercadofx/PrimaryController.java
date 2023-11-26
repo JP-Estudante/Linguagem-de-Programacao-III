@@ -1,19 +1,29 @@
 package mercadofx;
 
+import DAO.ProdutoDAO;
 import Models.Produto;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.TextField;
+import javafx.scene.input.InputMethodEvent;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.control.ToggleButton;
 
 public class PrimaryController {
 
     @FXML
-    private TableView<Produto> tabelaProdutos;
+    private TextField codBarrasTextField;
 
     @FXML
-    private TableColumn<Produto, String> colunaItem;
+    private TableView<Produto> produtosTableView;;
+    ObservableList<Produto> listaDeProdutos = FXCollections.observableArrayList();
+
+    @FXML
+    private TableColumn<Produto, Integer> colunaItem;
 
     @FXML
     private TableColumn<Produto, String> colunaDescricao;
@@ -26,28 +36,18 @@ public class PrimaryController {
 
     @FXML
     private TableColumn<Produto, Double> colunaValorTotal;
-
+    
     @FXML
     private ToggleButton toggleCodRef;
 
     @FXML
-    public void initialize() {
-        // Configurar as colunas para exibir os valores apropriados
-        colunaItem.setCellValueFactory(new PropertyValueFactory<>("item"));
-        colunaDescricao.setCellValueFactory(new PropertyValueFactory<>("descricao"));
-        colunaQuantidade.setCellValueFactory(new PropertyValueFactory<>("quantidade"));
-        colunaValorUnitario.setCellValueFactory(new PropertyValueFactory<>("valorUnitario"));
-        colunaValorTotal.setCellValueFactory(new PropertyValueFactory<>("valorTotal"));
+    void actionCodigoDeBarra(KeyEvent event) {
+        String codBarras = codBarrasTextField.getText();
+        buscarProdutoComCodBarras(codBarras);
+    }
 
-        // Adicionar produtos à tabela
-        tabelaProdutos.getItems().addAll(
-            new Produto("1", "Descrição do Produto 1", 5, 10.0),
-            new Produto("2", "Descrição do Produto 2", 3, 15.0),
-            new Produto("3", "Descrição do Produto 3", 2, 12.5),
-            new Produto("4", "Descrição do Produto 4", 4, 8.0),
-            new Produto("5", "Descrição do Produto   5", 6, 9.0),
-            new Produto("6", "Descrição do Produto 6", 1, 20.0)
-        );
+    @FXML
+    public void initialize() {
 
         // Adicione um manipulador de eventos ao ToggleButton
         toggleCodRef.setOnAction(event -> {
@@ -57,5 +57,13 @@ public class PrimaryController {
                 toggleCodRef.setText("Cód.:");
             }
         });
+    }
+
+    public void buscarProdutoComCodBarras(String codBarras) {
+        ProdutoDAO produtoDAO = new ProdutoDAO();
+
+        Produto produto = produtoDAO.getByCodBarras(codBarras);
+
+        System.out.println(produto);
     }
 }
