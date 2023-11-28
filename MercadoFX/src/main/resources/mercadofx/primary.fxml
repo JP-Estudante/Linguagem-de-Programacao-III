@@ -183,7 +183,7 @@
                   </TextField>
                </children>
             </GridPane>
-            <TextField layoutX="153.0" layoutY="735.0" prefHeight="62.0" prefWidth="274.0" text="7897546982347">
+            <TextField fx:id="codBarrasTextField" layoutX="153.0" layoutY="735.0" onAction="#actionCodigoDeBarra" prefHeight="62.0" prefWidth="274.0" text="7897546982347">
                <styleClass>
                   <String fx:value="bar-code" />
                   <String fx:value="font-collor" />

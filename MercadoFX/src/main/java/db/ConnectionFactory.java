@@ -11,8 +11,14 @@ public class ConnectionFactory {
 
     // Método para obter a conexão
     public Connection getConnection() throws SQLException {
-        if (connection == null || connection.isClosed()) {
-            connect();
+        try {
+            if (connection == null || connection.isClosed()) {
+                connect();
+            }
+        } catch (SQLException e) {
+            System.err.println("Erro ao verificar o estado da conexão: " + e.getMessage());
+            e.printStackTrace();
+            throw e; // Propague a exceção para que quem chama possa lidar com ela adequadamente
         }
         return connection;
     }
@@ -37,11 +43,14 @@ public class ConnectionFactory {
             connection = DriverManager.getConnection("jdbc:sqlite:" + databaseName);
             System.out.println("Conexão com o banco de dados estabelecida.");
         } catch (ClassNotFoundException e) {
+            System.err.println("Driver SQLite não encontrado: " + e.getMessage());
             e.printStackTrace();
             throw new SQLException("Driver SQLite não encontrado.", e);
         } catch (SQLException e) {
+            System.err.println("Erro ao conectar ao banco de dados: " + e.getMessage());
             e.printStackTrace();
             throw new SQLException("Erro ao conectar ao banco de dados.", e);
         }
     }
 }
+

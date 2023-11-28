@@ -1,4 +1,23 @@
-C:\Users\joaop\Documents\NetBeans Projects\Linguagem de Programação III\MercadoFX\src\main\java\mercadofx\App.java
-C:\Users\joaop\Documents\NetBeans Projects\Linguagem de Programação III\MercadoFX\src\main\java\Models\Produto.java
-C:\Users\joaop\Documents\NetBeans Projects\Linguagem de Programação III\MercadoFX\src\main\java\mercadofx\PrimaryController.java
-C:\Users\joaop\Documents\NetBeans Projects\Linguagem de Programação III\MercadoFX\src\main\java\module-info.java
+D:\JP - User\Documentos\NetBeans Projects\Linguagem de Programacao III\MercadoFX\src\main\java\mercadofx\PrimaryController.java
+D:\JP - User\Documentos\NetBeans Projects\Linguagem de Programacao III\MercadoFX\src\main\java\db\ConnectionFactory.java
+D:\JP - User\Documentos\NetBeans Projects\Linguagem de Programacao III\MercadoFX\src\main\java\DAO\VendaDAO.java
+D:\JP - User\Documentos\NetBeans Projects\Linguagem de Programacao III\MercadoFX\src\main\java\db\TryConnection.java
+D:\JP - User\Documentos\NetBeans Projects\Linguagem de Programacao III\MercadoFX\src\main\java\DAO\ProdutoDAO.java
+D:\JP - User\Documentos\NetBeans Projects\Linguagem de Programacao III\MercadoFX\src\main\java\DAO\ItemDescontoDAO.java
+D:\JP - User\Documentos\NetBeans Projects\Linguagem de Programacao III\MercadoFX\src\main\java\DAO\ClienteDAO.java
+D:\JP - User\Documentos\NetBeans Projects\Linguagem de Programacao III\MercadoFX\src\main\java\DAO\ItemVendaDAO.java
+D:\JP - User\Documentos\NetBeans Projects\Linguagem de Programacao III\MercadoFX\src\main\java\Models\Categoria.java
+D:\JP - User\Documentos\NetBeans Projects\Linguagem de Programacao III\MercadoFX\src\main\java\Models\CupomDesconto.java
+D:\JP - User\Documentos\NetBeans Projects\Linguagem de Programacao III\MercadoFX\src\main\java\Models\Cliente.java
+D:\JP - User\Documentos\NetBeans Projects\Linguagem de Programacao III\MercadoFX\src\main\java\Models\DescontoQuantidade.java
+D:\JP - User\Documentos\NetBeans Projects\Linguagem de Programacao III\MercadoFX\src\main\java\Models\DescontoCategoria.java
+D:\JP - User\Documentos\NetBeans Projects\Linguagem de Programacao III\MercadoFX\src\main\java\Models\Venda.java
+D:\JP - User\Documentos\NetBeans Projects\Linguagem de Programacao III\MercadoFX\src\main\java\module-info.java
+D:\JP - User\Documentos\NetBeans Projects\Linguagem de Programacao III\MercadoFX\src\main\java\db\SQLiteDBManager.java
+D:\JP - User\Documentos\NetBeans Projects\Linguagem de Programacao III\MercadoFX\src\main\java\mercadofx\App.java
+D:\JP - User\Documentos\NetBeans Projects\Linguagem de Programacao III\MercadoFX\src\main\java\DAO\CategoriaDAO.java
+D:\JP - User\Documentos\NetBeans Projects\Linguagem de Programacao III\MercadoFX\src\main\java\DAO\DescontoDAO.java
+D:\JP - User\Documentos\NetBeans Projects\Linguagem de Programacao III\MercadoFX\src\main\java\Models\ItemVenda.java
+D:\JP - User\Documentos\NetBeans Projects\Linguagem de Programacao III\MercadoFX\src\main\java\Models\DescontoProdutos.java
+D:\JP - User\Documentos\NetBeans Projects\Linguagem de Programacao III\MercadoFX\src\main\java\Models\Desconto.java
+D:\JP - User\Documentos\NetBeans Projects\Linguagem de Programacao III\MercadoFX\src\main\java\Models\Produto.java

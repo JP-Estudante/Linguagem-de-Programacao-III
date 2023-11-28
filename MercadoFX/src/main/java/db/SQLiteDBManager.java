@@ -7,17 +7,18 @@ import java.sql.SQLException;
 public class SQLiteDBManager {
 
     private Connection connection = null;
-    private String databaseName = "database.db";
+    private String databaseName = "mydatabase.db";
 
-    public void connect() throws SQLException {
+    public Connection connect() throws SQLException {
         if (connection != null) {
-            return;
+            return connection;
         }
 
         try {
             Class.forName("org.sqlite.JDBC");
             connection = DriverManager.getConnection("jdbc:sqlite:" + databaseName);
             System.out.println("Conexão com o banco de dados estabelecida.");
+            return connection;
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
             throw new SQLException("Driver SQLite não encontrado.", e);
@@ -38,6 +39,4 @@ public class SQLiteDBManager {
             e.printStackTrace();
         }
     }
-    
 }
-

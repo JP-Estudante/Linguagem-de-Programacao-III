@@ -6,11 +6,21 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import Models.Produto;
+import db.ConnectionFactory;
 
 public class ProdutoDAO {
 
     private Connection connection;
 
+    public ProdutoDAO(ConnectionFactory connectionFactory) {
+        try {
+            this.connection = connectionFactory.getConnection();
+        } catch (SQLException e) {
+            System.err.println("Erro ao obter a conexão com o banco de dados: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+    
     public Produto getByCodBarras(String codBarras) {
         String sql = "SELECT * FROM Produto WHERE cod_barras = ?";
 
@@ -28,6 +38,7 @@ public class ProdutoDAO {
                         resultSet.getString("cod_barras"));
             }
         } catch (SQLException e) {
+            System.err.println("Erro ao executar a consulta SQL: " + e.getMessage());
             e.printStackTrace();
         }
 
