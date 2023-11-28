@@ -23,26 +23,27 @@ public class ProdutoDAO {
     
     public Produto getByCodBarras(String codBarras) {
         String sql = "SELECT * FROM Produto WHERE cod_barras = ?";
-
+    
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, codBarras);
-
+    
             ResultSet resultSet = statement.executeQuery();
-
+    
             if (resultSet.next()) {
-                return new Produto(
-                        resultSet.getString("id_produto"),
-                        resultSet.getString("nome_produto"),
-                        resultSet.getDouble("valor_produto"),
-                        resultSet.getInt("id_categoria"),
-                        resultSet.getString("cod_barras"));
+                String idProduto = resultSet.getString("id_produto");
+                String nomeProduto = resultSet.getString("nome_produto");
+                double valorProduto = resultSet.getDouble("valor_produto");
+                int idCategoria = resultSet.getInt("id_categoria");
+                codBarras = resultSet.getString("cod_barras");
+    
+                return new Produto(idProduto, nomeProduto, valorProduto, idCategoria, codBarras);
             }
         } catch (SQLException e) {
             System.err.println("Erro ao executar a consulta SQL: " + e.getMessage());
             e.printStackTrace();
         }
-
-        return null; // Se nada for encontrado com o código de barras
+    
+        return null; // Retorna null se nenhum produto for encontrado
     }
 
 }

@@ -18,7 +18,6 @@ public class TryConnection {
                 ResultSet resultSet = statement.executeQuery();
 
                 while (resultSet.next()) {
-                    // Exemplo de como recuperar dados do resultado
                     int idProduto = resultSet.getInt("id_produto");
                     String nomeProduto = resultSet.getString("nome_produto");
                     double valorProduto = resultSet.getDouble("valor_produto");

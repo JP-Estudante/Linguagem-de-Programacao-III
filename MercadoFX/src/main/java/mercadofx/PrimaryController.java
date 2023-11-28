@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import DAO.ProdutoDAO;
 import Models.Produto;
 import db.ConnectionFactory;
+import db.SQLiteDBManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -19,6 +20,8 @@ public class PrimaryController {
 
     private ConnectionFactory connectionFactory;
     private ProdutoDAO produtoDAO;
+
+    SQLiteDBManager dbManager = new SQLiteDBManager();
 
     @FXML
     private TextField codBarrasTextField;
@@ -64,7 +67,7 @@ public class PrimaryController {
 
         connectionFactory = new ConnectionFactory();
 
-        try (Connection conexao = connectionFactory.getConnection()) {
+        try (Connection connection = dbManager.connect()) {
             produtoDAO = new ProdutoDAO(connectionFactory);
             System.out.println("Conexão com o banco de dados estabelecida.");
         } catch (SQLException ex) {
@@ -74,19 +77,12 @@ public class PrimaryController {
     }
 
     public void buscarProdutoComCodBarras(String codBarras) {
-        try (Connection conexao = connectionFactory.getConnection()) {
-            Produto produto = produtoDAO.getByCodBarras(codBarras);
+        Produto produto = produtoDAO.getByCodBarras(codBarras);
 
-            if (produto != null) {
-                System.out.println("Produto encontrado: " + produto);
-            } else {
-                System.out.println("Produto não encontrado para o código de barras: " + codBarras);
-            }
-
-            connectionFactory.closeConnection();
-        } catch (SQLException ex) {
-            System.err.println("Erro ao buscar produto por código de barras:");
-            ex.printStackTrace();
+        if (produto != null) {
+            System.out.println("Produto encontrado: " + produto);
+        } else {
+            System.out.println("Produto não encontrado para o código de barras: " + codBarras);
         }
     }
 }
