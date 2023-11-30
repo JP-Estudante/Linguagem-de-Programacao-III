@@ -183,7 +183,7 @@
                   </TextField>
                </children>
             </GridPane>
-            <TextField fx:id="codBarrasTextField" layoutX="153.0" layoutY="735.0" onAction="#actionCodigoDeBarra" prefHeight="62.0" prefWidth="274.0" text="7897546982347">
+            <TextField fx:id="codBarrasTextField" layoutX="153.0" layoutY="735.0" onAction="#actionCodigoDeBarra" prefHeight="62.0" prefWidth="274.0" text="123400001000">
                <styleClass>
                   <String fx:value="bar-code" />
                   <String fx:value="font-collor" />
@@ -208,16 +208,16 @@
    <center>
       <TableView fx:id="tabelaProdutos" prefHeight="200.0" prefWidth="200.0" stylesheets="@../css/style.css" BorderPane.alignment="CENTER">
         <columns>
-          <TableColumn fx:id="colunaItem" prefWidth="135.0" styleClass=".table-view" text="Item" />
-          <TableColumn fx:id="colunaDescricao" prefWidth="213.0" styleClass=".table-view" text="Descrição Produto" />
-            <TableColumn fx:id="colunaQuantidade" prefWidth="197.0" styleClass=".table-view" text="Quantidades" />
-            <TableColumn fx:id="colunaValorUnitario" minWidth="0.0" prefWidth="196.0" styleClass=".table-view" text="Valor Unitário" />
-            <TableColumn fx:id="colunaValorTotal" minWidth="0.0" prefWidth="195.0" styleClass=".table-view" text="Valor Total" />
+          <TableColumn fx:id="colunaItem" editable="false" prefWidth="73.0" sortable="false" style="-fx-alignment: CENTER;" text="Item" />
+          <TableColumn fx:id="colunaDescricao" editable="false" prefWidth="275.0" sortable="false" style="-fx-alignment: CENTER;" text="Descrição Produto" />
+            <TableColumn fx:id="colunaCategoria" editable="false" minWidth="0.0" prefWidth="196.0" sortable="false" style="-fx-alignment: CENTER;" text="Categoria" />
+            <TableColumn fx:id="colunaValorUnitario" editable="false" minWidth="0.0" prefWidth="195.0" sortable="false" style="-fx-alignment: CENTER;" text="Valor Unitário" />
+            <TableColumn fx:id="colunaQuantidade" editable="false" prefWidth="197.0" sortable="false" style="-fx-alignment: CENTER;" text="Quantidades" />
+            <TableColumn editable="false" prefWidth="142." sortable="false" text="Desconto" />
         </columns>
          <styleClass>
             <String fx:value="table-cell" />
-            <String fx:value="font-collor" />
-            <String fx:value="table-column" />
+            <String fx:value="table-view" />
          </styleClass>
       </TableView>
    </center>

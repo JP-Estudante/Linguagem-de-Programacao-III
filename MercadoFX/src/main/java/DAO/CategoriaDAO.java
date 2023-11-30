@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import Models.Categoria;
+import db.ConnectionFactory;
 
 public class CategoriaDAO {
 
@@ -14,6 +15,15 @@ public class CategoriaDAO {
     // Construtor que recebe a conexão
     public CategoriaDAO(Connection connection) {
         this.connection = connection;
+    }
+
+    public CategoriaDAO(ConnectionFactory connectionFactory) {
+        try {
+            this.connection = connectionFactory.getConnection();
+        } catch (SQLException e) {
+            System.err.println("Erro ao obter a conexão com o banco de dados: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     public Categoria getCategoriaById(int id) {
@@ -31,10 +41,7 @@ public class CategoriaDAO {
 
             // Verifica se há algum resultado
             if (resultSet.next()) {
-                // Preenche a instância de Categoria com os dados do resultado
-                categoria = new Categoria();
-                categoria.setIdCategoria(resultSet.getInt("id_categoria"));
-                categoria.setNomeCategoria(resultSet.getString("nome_categoria"));
+                categoria = Categoria.fromResultSet(resultSet);
             }
         } catch (SQLException e) {
             e.printStackTrace();

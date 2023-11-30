@@ -1,14 +1,17 @@
 package Models;
 
 public class Produto {
+
+    private Categoria categoria;
+
     private String id;
     private String nome;
     private double valorProduto;
-    private int idCategoria;
+    private Categoria idCategoria;
     private String codBarras;
+    private Integer quantidade;
 
-
-    public Produto(String id, String nome, double valorProduto, int idCategoria, String codBarras) {
+    public Produto(String id, String nome, double valorProduto, Categoria idCategoria, String codBarras) {
         this.id = id;
         this.nome = nome;
         this.valorProduto = valorProduto;
@@ -40,11 +43,11 @@ public class Produto {
         this.valorProduto = valorProduto;
     }
 
-    public int getIdCategoria() {
+    public Categoria getIdCategoria() {
         return this.idCategoria;
     }
 
-    public void setIdCategoria(int idCategoria) {
+    public void setIdCategoria(Categoria idCategoria) {
         this.idCategoria = idCategoria;
     }
 
@@ -55,7 +58,32 @@ public class Produto {
     public void setCodBarras(String codBarras) {
         this.codBarras = codBarras;
     }
-   
+
+    public Integer getQuantidade() {
+        return this.quantidade;
+    }
+
+    public void setQuantidade(Integer quantidade) {
+        this.quantidade = quantidade;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+                " id='" + getId() + "'" +
+                ", nome='" + getNome() + "'" +
+                ", valorProduto='" + getValorProduto() + 
+                "'" + getIdCategoria() + ", codBarras='" 
+                + getCodBarras() + "'" +
+                "}";
+    }
 
 }
-

@@ -180,13 +180,13 @@
       </AnchorPane>
    </right>
    <center>
-      <TableView prefHeight="566.0" prefWidth="526.0" stylesheets="@../css/aesthetic.css" BorderPane.alignment="CENTER">
+      <TableView prefHeight="566.0" prefWidth="526.0" styleClass="table-cell" stylesheets="@../css/aesthetic.css" BorderPane.alignment="CENTER">
         <columns>
-            <TableColumn fx:id="colunaItem" prefWidth="135.0" styleClass=".table-view" text="Item" />
+            <TableColumn fx:id="colunaItem" prefWidth="135.0" style="-fx-alignment: CENTER;" styleClass=".table-view" text="Item" />
             <TableColumn fx:id="colunaDescricao" prefWidth="213.0" styleClass=".table-view" text="Descrição Produto" />
-            <TableColumn fx:id="colunaQuantidade" prefWidth="197.0" styleClass=".table-view" text="Quantidades" />
-            <TableColumn fx:id="colunaValorUnitario" minWidth="0.0" prefWidth="196.0" styleClass=".table-view" text="Valor Unitário" />
-            <TableColumn fx:id="colunaValorTotal" minWidth="0.0" prefWidth="195.0" styleClass=".table-view" text="Valor Total" />
+            <TableColumn fx:id="colunaQuantidade" prefWidth="197.0" style="-fx-alignment: CENTER;" styleClass=".table-view" text="Quantidades" />
+            <TableColumn fx:id="colunaValorUnitario" minWidth="0.0" prefWidth="196.0" style="-fx-alignment: CENTER;" styleClass=".table-view" text="Valor Unitário" />
+            <TableColumn fx:id="colunaValorTotal" minWidth="0.0" prefWidth="195.0" style="-fx-alignment: CENTER;" styleClass=".table-view" text="Valor Total" />
         </columns>
       </TableView>
    </center>
