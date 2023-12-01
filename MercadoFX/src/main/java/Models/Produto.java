@@ -11,13 +11,14 @@ public class Produto {
     private String codBarras;
     private Integer quantidade;
 
-    public Produto(String id, String nome, double valorProduto, Categoria idCategoria, String codBarras) {
+    public Produto(String id, String nome, double valorProduto, Categoria categoria, String codBarras) {
         this.id = id;
         this.nome = nome;
         this.valorProduto = valorProduto;
-        this.idCategoria = idCategoria;
+        this.categoria = categoria;
         this.codBarras = codBarras;
     }
+    
 
     public String getId() {
         return this.id;

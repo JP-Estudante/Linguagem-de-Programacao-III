@@ -32,67 +32,53 @@
          <children>
             <VBox prefHeight="269.0" prefWidth="277.0">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="55.0" prefWidth="344.0" text="Finalizar Cupom">
+                  <Button mnemonicParsing="false" prefHeight="55.0" prefWidth="344.0" text="Finalizar Cupom" translateX="5.0">
                      <styleClass>
                         <String fx:value="menu-collor-light" />
                         <String fx:value="button" />
                         <String fx:value="font-collor" />
                      </styleClass>
                      <graphic>
-                        <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" translateX="-6.0">
                            <image>
                               <Image url="@../icons/finish-icon.png" />
                            </image>
                         </ImageView>
                      </graphic>
-                  </Button>
-                  <Button mnemonicParsing="false" prefHeight="55.0" prefWidth="316.0" text="Cancelar ult. item">
-                     <styleClass>
-                        <String fx:value="menu-collor-light" />
-                        <String fx:value="font-collor" />
-                     </styleClass>
-                     <graphic>
-                        <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../icons/cancel-icon.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
                      <VBox.margin>
-                        <Insets top="50.0" />
+                        <Insets bottom="15.0" />
                      </VBox.margin>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="55.0" prefWidth="307.0" text="Cancelar item esp." textAlignment="JUSTIFY">
+                  <Button mnemonicParsing="false" prefHeight="55.0" prefWidth="307.0" text="Limpar Cupom" textAlignment="JUSTIFY" translateX="-1.0">
                      <styleClass>
                         <String fx:value="menu-collor-light" />
                         <String fx:value="font-collor" />
                      </styleClass>
                      <graphic>
-                        <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" translateX="-9.0">
                            <image>
-                              <Image url="@../icons/cancel-icon.png" />
+                              <Image url="@../icons/clear-cart.png" />
                            </image>
                         </ImageView>
                      </graphic>
                      <VBox.margin>
-                        <Insets top="50.0" />
+                        <Insets bottom="15.0" />
                      </VBox.margin>
                   </Button>
-                  <AnchorPane prefHeight="291.0" prefWidth="776.0" />
-                  <Button mnemonicParsing="false" prefHeight="55.0" prefWidth="344.0" text="Cancelar Cupom">
+                  <Button mnemonicParsing="false" prefHeight="55.0" prefWidth="344.0" text="Cancelar Cupom" translateX="-10.0">
                      <styleClass>
                         <String fx:value="menu-collor-light" />
                         <String fx:value="font-collor" />
                      </styleClass>
                      <graphic>
-                        <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" translateX="-7.0">
                            <image>
                               <Image url="@../icons/cancel-icon.png" />
                            </image>
                         </ImageView>
                      </graphic>
                      <VBox.margin>
-                        <Insets top="50.0" />
+                        <Insets bottom="15.0" />
                      </VBox.margin>
                   </Button>
                </children>
@@ -132,7 +118,7 @@
                         <String fx:value="font-collor" />
                      </styleClass>
                   </Label>
-                  <TextField alignment="CENTER" editable="false" prefHeight="43.0" prefWidth="48.0" text="2" GridPane.columnIndex="1">
+                  <TextField fx:id="qtdTextField" alignment="CENTER" editable="false" prefHeight="43.0" prefWidth="48.0" text="2" GridPane.columnIndex="1">
                      <styleClass>
                         <String fx:value="checkout-values" />
                         <String fx:value="checkout-values-field" />
@@ -142,7 +128,7 @@
                         <Insets right="120.0" />
                      </GridPane.margin>
                   </TextField>
-                  <TextField editable="false" prefHeight="30.0" prefWidth="133.0" text="R$ 60,00" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <TextField fx:id="vlrTotlTextField" editable="false" prefHeight="30.0" prefWidth="133.0" text="R$ 60,00" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <styleClass>
                         <String fx:value="checkout-values" />
                         <String fx:value="checkout-values-field" />
@@ -152,7 +138,7 @@
                         <Insets right="35.0" />
                      </GridPane.margin>
                   </TextField>
-                  <TextField editable="false" prefHeight="43.0" prefWidth="125.0" text="R$ 30,00" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <TextField fx:id="vlrUnitTextField" editable="false" prefHeight="43.0" prefWidth="125.0" text="R$ 30,00" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <styleClass>
                         <String fx:value="checkout-values" />
                         <String fx:value="checkout-values-field" />
@@ -180,7 +166,7 @@
       </AnchorPane>
    </right>
    <center>
-      <TableView prefHeight="566.0" prefWidth="526.0" styleClass="table-cell" stylesheets="@../css/aesthetic.css" BorderPane.alignment="CENTER">
+      <TableView onKeyPressed="#linhaSelecionadaTeclado" onMousePressed="#linhaSelecionadaMouse" prefHeight="566.0" prefWidth="526.0" styleClass="table-cell" stylesheets="@../css/aesthetic.css" BorderPane.alignment="CENTER">
         <columns>
             <TableColumn fx:id="colunaItem" prefWidth="135.0" style="-fx-alignment: CENTER;" styleClass=".table-view" text="Item" />
             <TableColumn fx:id="colunaDescricao" prefWidth="213.0" styleClass=".table-view" text="Descrição Produto" />

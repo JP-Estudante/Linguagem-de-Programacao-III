@@ -1,12 +1,12 @@
-package DAO;
+// package DAO;
 
-import Models.Venda;
+// import Models.Venda;
 
-public class VendaDAO {
-    public Venda getVendaById(int id) {
-        Venda venda = null;
+// public class VendaDAO {
+//     public Venda getVendaById(int id) {
+//         Venda venda = null;
 
-        return venda;
-    }
-}
+//         return venda;
+//     }
+// }
 

@@ -1,0 +1,76 @@
+/* ⚠️ BOTÕES ⚠️ */
+/* Estilo básico para botões */
+.button {
+    -fx-background-color: #52796f;
+    -fx-background-radius: 5;
+    -fx-border-width: 1;
+    -fx-padding: 10 20;
+    -fx-font-family: "Segoe UI Symbol";
+    -fx-font-size: 24px;
+}
+
+/* Estilo para botões quando o mouse passa por cima deles */
+.button:hover {
+    -fx-background-color: #84a98c;
+    /* Altere a cor de fundo quando o mouse passa por cima */
+    -fx-text-fill: #354f52;
+    /* Altere a cor do texto quando o mouse passa por cima */
+}
+
+
+
+
+/* ⚠️ CAMPOS DE TEXTO ⚠️ */
+.text-field-setting {
+    -fx-background-radius: 5;
+    -fx-border-color: #84A98C;
+    -fx-background-color: #52796f;
+    -fx-border-width: 1;
+    -fx-border-radius: 5;
+    -fx-padding: 5;
+    -fx-effect: innershadow(3px 3px 5px rgba(0, 0, 0, 0.1));
+    -fx-prompt-text-fill: #354f52;
+}
+
+
+
+
+/* ⚠️ CONTEINERS ⚠️ */
+/* Estilo para HBox com a cor #f4a261 */
+.hbox-com-cor {
+    -fx-background-color: #f4a261;
+}
+
+.menu-collor-light {
+    -fx-background-color: #52796f;
+}
+
+.menu-collor-solid {
+    -fx-background-color: #354F52;
+}
+
+.font-collor {
+    -fx-text-fill: #fcbf49;
+}
+
+
+/* ⚠️ FONTES ⚠️ */
+/* Estilo da fonte para os Texts*/
+.font-setting-title{
+    -fx-text-fill: #fcbf49;
+    -fx-font-size: 26px;
+    -fx-font-family: "Segoe UI Symbol";
+    -fx-font-weight: bold;
+}
+
+/* Estilo da fonte para os Labels*/
+.font-setting-label{
+    -fx-text-fill: #fcbf49;
+    -fx-font-size: 16px;
+    -fx-font-family: "Segoe UI Symbol";
+
+}
+
+.cursor {
+    -fx-cursor: not-allowed;
+}

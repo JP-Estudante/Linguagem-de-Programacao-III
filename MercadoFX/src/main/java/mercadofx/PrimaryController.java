@@ -9,6 +9,7 @@ import java.util.Optional;
 import DAO.CategoriaDAO;
 import DAO.ProdutoDAO;
 import Models.Categoria;
+import Models.ItemCarrinho;
 import Models.Produto;
 import db.ConnectionFactory;
 import db.SQLiteDBManager;
@@ -23,6 +24,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 
 public class PrimaryController {
@@ -30,30 +33,40 @@ public class PrimaryController {
     private ConnectionFactory connectionFactory;
     private ProdutoDAO produtoDAO;
     private CategoriaDAO categoriaDAO;
+    private double valorTotalAcumulado = 0.0;
 
     SQLiteDBManager dbManager = new SQLiteDBManager();
+
+    @FXML
+    private TextField vlrTotlTextField;
+
+    @FXML
+    private TextField vlrUnitTextField;
+
+    @FXML
+    private TextField qtdTextField;
 
     @FXML
     private TextField codBarrasTextField;
 
     @FXML
-    private TableView<Produto> tabelaProdutos;
-    ObservableList<Produto> listaDeProdutos = FXCollections.observableArrayList();
+    private TableView<ItemCarrinho> tabelaProdutos;
+    ObservableList<ItemCarrinho> itensCarrinho = FXCollections.observableArrayList();
 
     @FXML
-    private TableColumn<Produto, Integer> colunaItem;
+    private TableColumn<ItemCarrinho, Integer> colunaItem;
 
     @FXML
-    private TableColumn<Produto, String> colunaDescricao;
+    private TableColumn<ItemCarrinho, String> colunaDescricao;
 
     @FXML
-    private TableColumn<Produto, Categoria> colunaCategoria;
+    private TableColumn<ItemCarrinho, Categoria> colunaCategoria;
 
     @FXML
-    private TableColumn<Produto, Double> colunaValorUnitario;
+    private TableColumn<ItemCarrinho, Double> colunaValorUnitario;
 
     @FXML
-    private TableColumn<Produto, ?> colunaQuantidade;
+    private TableColumn<ItemCarrinho, Integer> colunaQuantidade;
 
     @FXML
     private ToggleButton toggleCodRef;
@@ -66,16 +79,30 @@ public class PrimaryController {
         buscarProdutoComCodBarras(codBarras);
     }
 
+    @FXML // Evento de seleção de linha
+    void linhaSelecionadaMouse(MouseEvent event) {
+        if (event.getClickCount() == 1) // Verifica se é um clique único
+            mostrarValoresLinhaSelecionada();
+    }
+
+    @FXML
+    void linhaSelecionadaTeclado(KeyEvent event) {
+        if (event.getCode().isArrowKey())
+        mostrarValoresLinhaSelecionada();
+    }
+
     @FXML
     public void initialize() {
         // Configurações das colunas do TableView
-        colunaDescricao.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        colunaDescricao.setCellValueFactory(
+                cellData -> new SimpleObjectProperty<>(cellData.getValue().getProduto().getNome()));
+
         colunaValorUnitario.setCellValueFactory(new PropertyValueFactory<>("valorProduto"));
         colunaQuantidade.setCellValueFactory(new PropertyValueFactory<>("quantidade"));
 
         // Configuração da Coluna Item
         colunaItem.setCellFactory(column -> {
-            return new TableCell<Produto, Integer>() {
+            return new TableCell<ItemCarrinho, Integer>() {
                 @Override
                 protected void updateItem(Integer item, boolean empty) {
                     super.updateItem(item, empty);
@@ -90,36 +117,39 @@ public class PrimaryController {
         });
 
         // Configuração da Coluna Valor Unitário
-        colunaValorUnitario.setCellValueFactory(new PropertyValueFactory<>("valorProduto"));
-        colunaValorUnitario.setCellFactory(new Callback<TableColumn<Produto, Double>, TableCell<Produto, Double>>() {
-            @Override
-            public TableCell<Produto, Double> call(TableColumn<Produto, Double> param) {
-                return new TableCell<Produto, Double>() {
+        colunaValorUnitario.setCellValueFactory(
+                cellData -> new SimpleObjectProperty<>(cellData.getValue().getProduto().getValorProduto()));
+        colunaValorUnitario
+                .setCellFactory(new Callback<TableColumn<ItemCarrinho, Double>, TableCell<ItemCarrinho, Double>>() {
                     @Override
-                    protected void updateItem(Double valor, boolean empty) {
-                        super.updateItem(valor, empty);
+                    public TableCell<ItemCarrinho, Double> call(TableColumn<ItemCarrinho, Double> param) {
+                        return new TableCell<ItemCarrinho, Double>() {
+                            @Override
+                            protected void updateItem(Double valor, boolean empty) {
+                                super.updateItem(valor, empty);
 
-                        if (empty || valor == null) {
-                            setText(null);
-                        } else {
-                            setText(NumberFormat.getCurrencyInstance(Locale.forLanguageTag("pt-BR")).format(valor));
-                        }
+                                if (empty || valor == null) {
+                                    setText(null);
+                                } else {
+                                    setText(NumberFormat.getCurrencyInstance(Locale.forLanguageTag("pt-BR"))
+                                            .format(valor));
+                                }
+                            }
+                        };
                     }
-                };
-            }
-        });
+                });
 
         // Configuração da Coluna Categoria
-        colunaCategoria.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getCategoria()));
+        colunaCategoria.setCellValueFactory(
+                cellData -> new SimpleObjectProperty<>(cellData.getValue().getProduto().getCategoria()));
         colunaCategoria.setCellFactory(column -> {
-            return new TableCell<Produto, Categoria>() {
+            return new TableCell<ItemCarrinho, Categoria>() {
                 @Override
                 protected void updateItem(Categoria categoria, boolean empty) {
                     super.updateItem(categoria, empty);
 
                     if (empty || categoria == null) {
                         setText(null);
-
                     } else {
 
                         // Certifique-se de que categoriaDAO não seja nulo
@@ -157,36 +187,50 @@ public class PrimaryController {
         }
     }
 
+    private void mostrarValoresLinhaSelecionada() {
+        // Obtém a linha selecionada
+        ItemCarrinho itemSelecionado = tabelaProdutos.getSelectionModel().getSelectedItem();
+
+        if (itemSelecionado != null) {
+            // Preenche os TextFields com os valores da linha selecionada
+            vlrUnitTextField.setText(NumberFormat.getCurrencyInstance(Locale.forLanguageTag("pt-BR"))
+                    .format(itemSelecionado.getProduto().getValorProduto()));
+            qtdTextField.setText(String.valueOf(itemSelecionado.getQuantidade()));
+        }
+    }
+
     public void buscarProdutoComCodBarras(String codBarras) {
         Produto produto = produtoDAO.getByCodBarras(codBarras);
 
         if (produto != null) {
-            // Verificar se o produto já está na lista
-            Optional<Produto> produtoExistente = listaDeProdutos.stream()
-                    .filter(p -> p.getId().equals(produto.getId()))
+            // Verifica se o produto já está no carrinho
+            Optional<ItemCarrinho> itemExistente = itensCarrinho.stream()
+                    .filter(item -> item.getProduto().getId().equals(produto.getId()))
                     .findFirst();
 
-            if (produtoExistente.isPresent()) {
-                // Aumenta a quantidade do produto na lista
-                produtoExistente.get().setQuantidade(produtoExistente.get().getQuantidade() + 1);
-                System.out.println("Produto existente na tabela. Quantidade atualizada.");
-
+            if (itemExistente.isPresent()) {
+                // Aumenta a quantidade do item no carrinho
+                ItemCarrinho itemCarrinhoExistente = itemExistente.get();
+                itemCarrinhoExistente.setQuantidade(itemCarrinhoExistente.getQuantidade() + 1);
+                System.out.println("Produto existente no carrinho. Quantidade atualizada.");
             } else {
-                // Se o produto não existe
-                produto.setQuantidade(1);
-                listaDeProdutos.add(produto);
-                System.out.println("Novo produto adicionado ao cupom.");
-
+                // Se o produto não está no carrinho, adiciona como um novo item
+                ItemCarrinho novoItem = new ItemCarrinho(produto, 1);
+                itensCarrinho.add(novoItem);
+                System.out.println("Novo produto adicionado ao carrinho.");
             }
 
-            System.out.println("Produto encontrado: " + produto);
-
-            // Atualizar a TableView
-            tabelaProdutos.setItems(listaDeProdutos);
+            // Atualiza a TableView
+            tabelaProdutos.setItems(itensCarrinho);
             tabelaProdutos.refresh();
 
+            // Atualiza a exibição do valor total nos TextFields
+            valorTotalAcumulado += produto.getValorProduto();
+            vlrTotlTextField.setText(NumberFormat.getCurrencyInstance(Locale.forLanguageTag("pt-BR"))
+                    .format(valorTotalAcumulado));
         } else {
             System.out.println("Produto não encontrado para o código de barras: " + codBarras);
         }
     }
+
 }
