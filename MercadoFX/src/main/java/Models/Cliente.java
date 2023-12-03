@@ -2,12 +2,22 @@ package Models;
 
 public class Cliente {
 
+    private Integer id;
     private String nome;
-    private int cpf;
+    private String cpf;
 
-    public Cliente (String nome, int cpf) {
-        this.nome = nome; 
+    public Cliente(String nome, String cpf, int id) {
+        this.nome = nome;
         this.cpf = cpf;
+        this.id = id;
+    }
+
+    public Integer getId() {
+        return this.id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -18,11 +28,11 @@ public class Cliente {
         this.nome = nome;
     }
 
-    public int getCpf() {
+    public String getCpf() {
         return this.cpf;
     }
 
-    public void setCpf(int cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 

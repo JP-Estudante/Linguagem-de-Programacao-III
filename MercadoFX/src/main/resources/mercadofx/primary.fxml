@@ -104,6 +104,23 @@
          <children>
             <Text layoutX="1643.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: Segoe UI Symbol; -fx-font-size: 30; -fx-fill: #84A98C; -fx-font-weight: bold; -fx-font-style: italic;" text="Caixa Rápido" wrappingWidth="190.4609375" />
             <Text layoutX="757.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: Impact; -fx-font-size: 40; -fx-fill: #fcbf49;" text="Ritmo &amp; Sabor Emporium" wrappingWidth="405.24609375" />
+            <GridPane layoutX="60.0" layoutY="88.0" prefHeight="30.0" prefWidth="617.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="116.0" minWidth="10.0" prefWidth="113.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="97.0" minWidth="10.0" prefWidth="87.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: Segoe UI Symbol; -fx-font-size: 30; -fx-fill: #84A98C; -fx-font-weight: bold; -fx-font-style: italic;" text="Cliente:" wrappingWidth="109.4609375" />
+                  <Text fx:id="nomeClienteLabel" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: Segoe UI Symbol; -fx-font-size: 24; -fx-fill: #84A98C; -fx-font-weight: bold; -fx-font-style: italic;" text="Nenhum" wrappingWidth="500.4609375" GridPane.columnIndex="1">
+                     <GridPane.margin>
+                        <Insets bottom="-6.0" />
+                     </GridPane.margin>
+                  </Text>
+               </children>
+            </GridPane>
          </children>
       </AnchorPane>
    </top>

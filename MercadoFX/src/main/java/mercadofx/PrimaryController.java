@@ -26,6 +26,7 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 import javafx.util.Callback;
 
 public class PrimaryController {
@@ -36,12 +37,15 @@ public class PrimaryController {
     private double valorTotalAcumulado = 0.0;
 
     SQLiteDBManager dbManager = new SQLiteDBManager();
+  
+    @FXML
+    private Text nomeClienteLabel;
 
     @FXML
     private TextField vlrTotlTextField;
 
     @FXML
-    private TextField vlrUnitTextField;
+    private TextField vlrUnitTextField; 
 
     @FXML
     private TextField qtdTextField;
@@ -93,6 +97,7 @@ public class PrimaryController {
 
     @FXML
     public void initialize() {
+
         // Configurações das colunas do TableView
         colunaDescricao.setCellValueFactory(
                 cellData -> new SimpleObjectProperty<>(cellData.getValue().getProduto().getNome()));
