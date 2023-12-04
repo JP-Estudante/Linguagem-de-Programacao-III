@@ -231,7 +231,7 @@
             <TableColumn fx:id="colunaCategoria" editable="false" minWidth="0.0" prefWidth="196.0" sortable="false" style="-fx-alignment: CENTER;" text="Categoria" />
             <TableColumn fx:id="colunaValorUnitario" editable="false" minWidth="0.0" prefWidth="195.0" sortable="false" style="-fx-alignment: CENTER;" text="Valor Unitário" />
             <TableColumn fx:id="colunaQuantidade" editable="false" prefWidth="197.0" sortable="false" style="-fx-alignment: CENTER;" text="Quantidades" />
-            <TableColumn editable="false" prefWidth="164.5" sortable="false" text="Desconto" />
+            <TableColumn fx:id="colunaDesconto" editable="false" prefWidth="164.5" sortable="false" text="Desconto" />
         </columns>
          <styleClass>
             <String fx:value="table-cell" />
