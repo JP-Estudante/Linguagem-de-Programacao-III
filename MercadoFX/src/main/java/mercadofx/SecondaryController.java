@@ -183,12 +183,14 @@ public class SecondaryController {
     }
 
     private void handleContinueAction() {
-        if (!idTextField.getText().isEmpty() && !nomeTextField.getText().isEmpty()
-                && cpfTextField.getText().replaceAll("[^0-9]", "").length() == 11) {
+        if (!idTextField.getText().isEmpty() &&
+                !nomeTextField.getText().isEmpty() &&
+                cpfTextField.getText().replaceAll("[^0-9]", "").length() == 11 &&
+                !nomeTextField.getText().trim().equalsIgnoreCase("Cliente não encontrado")) {
             // Se houver um cliente
             System.out.println("Venda com cliente!");
             System.out.println(cpfTextField.getText());
-            
+
             // Marcar que a tecla F1 foi pressionada
             f1KeyPressed = true;
 
