@@ -1,33 +1,35 @@
 package mercadofx;
 
+import javafx.scene.Node;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.stage.Stage;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.NumberFormat;
 import java.util.Locale;
 import java.util.Optional;
+import db.ConnectionFactory;
+import db.SQLiteDBManager;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
+import javafx.util.Callback;
 
 import DAO.CategoriaDAO;
 import DAO.ProdutoDAO;
 import Models.Categoria;
 import Models.ItemCarrinho;
 import Models.Produto;
-import db.ConnectionFactory;
-import db.SQLiteDBManager;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleButton;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.text.Text;
-import javafx.util.Callback;
 
 public class PrimaryController {
 
@@ -37,7 +39,7 @@ public class PrimaryController {
     private double valorTotalAcumulado = 0.0;
 
     SQLiteDBManager dbManager = new SQLiteDBManager();
-  
+
     @FXML
     private Text nomeClienteLabel;
 
@@ -45,7 +47,7 @@ public class PrimaryController {
     private TextField vlrTotlTextField;
 
     @FXML
-    private TextField vlrUnitTextField; 
+    private TextField vlrUnitTextField;
 
     @FXML
     private TextField qtdTextField;
@@ -73,30 +75,10 @@ public class PrimaryController {
     private TableColumn<ItemCarrinho, Integer> colunaQuantidade;
 
     @FXML
-    private ToggleButton toggleCodRef;
-
-    @FXML // Evento de leitura do codigo de barras
-    void actionCodigoDeBarra(ActionEvent event) {
-        String codBarras = codBarrasTextField.getText();
-        System.out.println(codBarras);
-
-        buscarProdutoComCodBarras(codBarras);
-    }
-
-    @FXML // Evento de seleção de linha
-    void linhaSelecionadaMouse(MouseEvent event) {
-        if (event.getClickCount() == 1) // Verifica se é um clique único
-            mostrarValoresLinhaSelecionada();
-    }
-
-    @FXML
-    void linhaSelecionadaTeclado(KeyEvent event) {
-        if (event.getCode().isArrowKey())
-        mostrarValoresLinhaSelecionada();
-    }
-
-    @FXML
     public void initialize() {
+        // Alterando a mensagem quando a tabela esta vazia
+        tabelaProdutos.setPlaceholder(new Text("Cupom Vazio 💳"));
+        tabelaProdutos.getPlaceholder().getStyleClass().add("tabela-vazia-texto");
 
         // Configurações das colunas do TableView
         colunaDescricao.setCellValueFactory(
@@ -171,14 +153,6 @@ public class PrimaryController {
             };
         });
 
-        toggleCodRef.setOnAction(event -> {
-            if (toggleCodRef.isSelected()) {
-                toggleCodRef.setText("Ref.:");
-            } else {
-                toggleCodRef.setText("Cód.:");
-            }
-        });
-
         connectionFactory = new ConnectionFactory();
 
         try (Connection connection = dbManager.connect()) {
@@ -189,6 +163,102 @@ public class PrimaryController {
         } catch (SQLException ex) {
             System.err.println("Erro ao estabelecer a conexão com o banco de dados:");
             ex.printStackTrace();
+        }
+    }
+
+    @FXML
+    void finalizarCupomOnClicked(ActionEvent event) {
+
+    }
+
+    @FXML
+    void cancelarItemOnClicked(ActionEvent event) {
+        // Obtém o item selecionado na tabela
+        ItemCarrinho itemSelecionado = tabelaProdutos.getSelectionModel().getSelectedItem();
+
+        if (itemSelecionado != null) {
+            // Subtrai o valor do produto do total acumulado
+            valorTotalAcumulado -= itemSelecionado.getProduto().getValorProduto();
+            vlrTotlTextField.setText(NumberFormat.getCurrencyInstance(Locale.forLanguageTag("pt-BR"))
+                    .format(valorTotalAcumulado));
+
+            // Reduz a quantidade do item em 1
+            int novaQuantidade = itemSelecionado.getQuantidade() - 1;
+
+            // Se a nova quantidade for maior que zero, atualiza a quantidade no item,
+            // caso contrário, remove o item da lista
+            if (novaQuantidade > 0) {
+                itemSelecionado.setQuantidade(novaQuantidade);
+            } else {
+                itensCarrinho.remove(itemSelecionado);
+            }
+
+            // Atualiza a TableView
+            tabelaProdutos.setItems(itensCarrinho);
+            tabelaProdutos.refresh();
+
+            // Atualiza os campos qtdTextField e vlrUnitTextField
+            atualizarCampos();
+
+        } else {
+            System.out.println("Nenhum item selecionado para cancelar.");
+        }
+    }
+
+    @FXML
+    void limparCupomOnClicked(ActionEvent event) {
+        // Crie uma nova instância da classe principal
+        App newApp = new App();
+
+        // Crie um novo estágio para a nova instância
+        Stage newPrimaryStage = new Stage();
+
+        // Chame o método start da nova instância
+        try {
+            newApp.start(newPrimaryStage);
+        } catch (IOException e) {
+            e.printStackTrace(); // Trate a exceção conforme necessário
+        }
+
+        // Feche o estágio anterior (o estágio atual)
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        currentStage.close();
+    }
+
+    @FXML // Evento de leitura do codigo de barras
+    void actionCodigoDeBarra(ActionEvent event) {
+        String codBarras = codBarrasTextField.getText();
+        System.out.println(codBarras);
+
+        buscarProdutoComCodBarras(codBarras);
+    }
+
+    @FXML // Evento de seleção de linha
+    void linhaSelecionadaMouse(MouseEvent event) {
+        if (event.getClickCount() == 1) // Verifica se é um clique único
+            mostrarValoresLinhaSelecionada();
+    }
+
+    @FXML
+    void linhaSelecionadaTeclado(KeyEvent event) {
+        if (event.getCode().isArrowKey())
+            mostrarValoresLinhaSelecionada();
+    }
+
+    // Método para atualizar os campos qtdTextField e vlrUnitTextField
+    private void atualizarCampos() {
+        // Obtém o item selecionado na tabela
+        ItemCarrinho itemSelecionado = tabelaProdutos.getSelectionModel().getSelectedItem();
+
+        if (itemSelecionado != null) {
+            // Preenche os TextFields com os valores do item selecionado
+            vlrUnitTextField.setText(NumberFormat.getCurrencyInstance(Locale.forLanguageTag("pt-BR"))
+                    .format(itemSelecionado.getProduto().getValorProduto()));
+            qtdTextField.setText(String.valueOf(itemSelecionado.getQuantidade()));
+        } else {
+            // Se nenhum item estiver selecionado, limpa os TextFields
+            vlrUnitTextField.clear();
+            qtdTextField.clear();
         }
     }
 

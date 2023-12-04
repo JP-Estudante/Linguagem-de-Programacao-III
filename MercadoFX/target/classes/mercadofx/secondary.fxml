@@ -28,7 +28,7 @@
          <children>
             <Label layoutX="4.0" layoutY="11.0" onKeyReleased="#keyBindsReleased" prefHeight="38.0" prefWidth="112.0" style="-fx-background-size: 26;" styleClass="font-setting-title" text="Cliente" />
             <Label layoutX="290.0" layoutY="66.0" prefHeight="24.0" prefWidth="112.0" styleClass="font-setting-label" text="Nr. Cadastro:" />
-            <TextField fx:id="idTextField" editable="false" layoutX="397.0" layoutY="60.0" onKeyPressed="#keyBindsPressed" onKeyReleased="#keyBindsReleased" prefHeight="36.0" prefWidth="42.0" promptText="000">
+            <TextField fx:id="idTextField" disable="true" editable="false" layoutX="397.0" layoutY="60.0" onKeyPressed="#keyBindsPressed" onKeyReleased="#keyBindsReleased" prefHeight="36.0" prefWidth="42.0" promptText="000" style="-fx-opacity: 1;">
                <styleClass>
                   <String fx:value="text-field-setting" />
                   <String fx:value="font-setting-label" />
@@ -61,7 +61,7 @@
                </children>
             </VBox>
             <Label layoutX="56.0" layoutY="126.0" styleClass="font-setting-label" text="Nome:" />
-            <TextField fx:id="nomeTextField" editable="false" layoutX="113.0" layoutY="120.0" onKeyPressed="#keyBindsPressed" onKeyReleased="#keyBindsReleased" prefHeight="36.0" prefWidth="256.0" promptText="Nome Sobrenome">
+            <TextField fx:id="nomeTextField" disable="true" editable="false" layoutX="113.0" layoutY="120.0" onKeyPressed="#keyBindsPressed" onKeyReleased="#keyBindsReleased" prefHeight="36.0" prefWidth="256.0" promptText="Nome Sobrenome" style="-fx-opacity: 1;">
                <styleClass>
                   <String fx:value="text-field-setting" />
                   <String fx:value="cursor" />

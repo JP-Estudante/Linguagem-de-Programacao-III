@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.effect.BoxBlur;
+import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -26,9 +27,18 @@ public class App extends Application {
         primaryStage = stage;
         scene = new Scene(loadFXML("primary"), 640, 480);
 
+        // Carregando um arquivo CSS
+        scene.getStylesheets().add(getClass().getResource("table-view.css").toExternalForm());
+
         // Criando um efeito de desfoque
         BoxBlur blur = new BoxBlur(2.6, 2.6, 2);
         scene.getRoot().setEffect(blur);
+
+        // Titulo da janela
+        stage.setTitle("Xpress Sistemas");
+
+        // Icone da janel
+        stage.getIcons().add(new Image(getClass().getResourceAsStream("Logo-Xpress.png")));
 
         stage.setScene(scene);
         stage.setMaximized(true);
@@ -41,7 +51,7 @@ public class App extends Application {
         } catch (SQLException e) {
             System.err.println("Erro ao obter a conexão com o banco de dados: " + e.getMessage());
             e.printStackTrace();
-            // Trate a exceção conforme necessário para sua aplicação
+
             return;
         }
 
@@ -65,12 +75,15 @@ public class App extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("secondary.fxml"));
         Parent root = fxmlLoader.load();
 
-        // Obtenha uma referência ao controlador
+        // Referência ao controlador
         SecondaryController secondaryController = fxmlLoader.getController();
 
         secondaryStage = new Stage();
         secondaryStage.initStyle(StageStyle.UNDECORATED);
         secondaryStage.initModality(Modality.APPLICATION_MODAL);
+
+        // Definindo o PrimaryStage como proprietária da SecondaryStage
+        secondaryStage.initOwner(primaryStage);
 
         secondaryStage.setScene(new Scene(root));
 
@@ -82,11 +95,11 @@ public class App extends Application {
         secondaryController.initialize(connection);
 
         secondaryStage.setOnHidden(event -> {
-            // Remover o efeito de desfoque quando a janela secundária é fechada
+            // Remove o efeito de desfoque
             scene.getRoot().setEffect(null);
         });
 
-        // Reduz a opacidade da janela principal quando a janela secundária é mostrada
+        // Reduz a opacidade da janela principal
         secondaryStage.show();
     }
 

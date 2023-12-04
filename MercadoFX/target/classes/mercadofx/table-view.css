@@ -1,0 +1,5 @@
+.tabela-vazia-texto {
+    -fx-font-size: 36px;
+    -fx-fill: #84A98C; /* Cor do texto */
+    -fx-font-weight: bold;
+}

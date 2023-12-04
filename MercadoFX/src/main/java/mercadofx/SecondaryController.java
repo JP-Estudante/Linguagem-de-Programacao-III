@@ -27,10 +27,10 @@ public class SecondaryController {
     private TextField cpfTextField;
 
     @FXML
-    private TextField idTextField;
+    private TextField idTextField = null;
 
     @FXML
-    private TextField nomeTextField;
+    private TextField nomeTextField = null;
 
     @FXML
     private Button cancelarButton;
@@ -173,6 +173,7 @@ public class SecondaryController {
 
     @FXML // Evento com o botão continuar
     void handleContinueButton(ActionEvent event) {
+        System.out.println("Venda com cliente!");
         closeWindow();
     }
 
@@ -182,10 +183,12 @@ public class SecondaryController {
     }
 
     private void handleContinueAction() {
-        if (clienteDAO.getClienteByCpf(cpfTextField.getText()) != null) {
+        if (!idTextField.getText().isEmpty() && !nomeTextField.getText().isEmpty()
+                && cpfTextField.getText().replaceAll("[^0-9]", "").length() == 11) {
             // Se houver um cliente
             System.out.println("Venda com cliente!");
-
+            System.out.println(cpfTextField.getText());
+            
             // Marcar que a tecla F1 foi pressionada
             f1KeyPressed = true;
 
