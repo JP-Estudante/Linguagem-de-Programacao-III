@@ -11,8 +11,8 @@ import java.text.NumberFormat;
 import java.util.Locale;
 import java.util.Optional;
 import db.ConnectionFactory;
-import db.SQLiteDBManager;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableCell;
@@ -26,6 +26,7 @@ import javafx.scene.text.Text;
 import javafx.util.Callback;
 
 import DAO.CategoriaDAO;
+import DAO.DescontoDAO;
 import DAO.ProdutoDAO;
 import Models.Categoria;
 import Models.ItemCarrinho;
@@ -36,9 +37,9 @@ public class PrimaryController {
     private ConnectionFactory connectionFactory;
     private ProdutoDAO produtoDAO;
     private CategoriaDAO categoriaDAO;
+    private DescontoDAO descontoDAO;
+    private Connection connection;
     private double valorTotalAcumulado = 0.0;
-
-    SQLiteDBManager dbManager = new SQLiteDBManager();
 
     @FXML
     private Text nomeClienteLabel;
@@ -75,8 +76,26 @@ public class PrimaryController {
     private TableColumn<ItemCarrinho, Integer> colunaQuantidade;
 
     @FXML
+    private TableColumn<ItemCarrinho, String> colunaDesconto;
+
+    @FXML
     public void initialize() {
-        // Alterando a mensagem quando a tabela esta vazia
+        connectionFactory = new ConnectionFactory();
+
+        try {
+            connection = connectionFactory.getConnection();
+
+            produtoDAO = new ProdutoDAO(connectionFactory);
+            categoriaDAO = new CategoriaDAO(connectionFactory);
+            descontoDAO = new DescontoDAO(connectionFactory);
+
+            System.out.println("Conexão com o banco de dados estabelecida.");
+        } catch (SQLException ex) {
+            System.err.println("Erro ao estabelecer a conexão com o banco de dados:");
+            ex.printStackTrace();
+        }
+
+        // Alterando a mensagem quando a tabela está vazia
         tabelaProdutos.setPlaceholder(new Text("Cupom Vazio 💳"));
         tabelaProdutos.getPlaceholder().getStyleClass().add("tabela-vazia-texto");
 
@@ -127,8 +146,6 @@ public class PrimaryController {
                 });
 
         // Configuração da Coluna Categoria
-        colunaCategoria.setCellValueFactory(
-                cellData -> new SimpleObjectProperty<>(cellData.getValue().getProduto().getCategoria()));
         colunaCategoria.setCellFactory(column -> {
             return new TableCell<ItemCarrinho, Categoria>() {
                 @Override
@@ -138,8 +155,8 @@ public class PrimaryController {
                     if (empty || categoria == null) {
                         setText(null);
                     } else {
-
-                        // Certifique-se de que categoriaDAO não seja nulo
+                        // Verifique se categoriaDAO não é nulo antes de tentar obter o nome da
+                        // categoria
                         if (categoriaDAO != null) {
                             // Adicione mensagens de depuração para verificar o valor de categoria
                             System.out.println("Categoria: " + categoria.getNomeCategoria());
@@ -153,22 +170,20 @@ public class PrimaryController {
             };
         });
 
-        connectionFactory = new ConnectionFactory();
+        // Configuração da Coluna Desconto
+        colunaDesconto.setCellValueFactory(cellData -> {
+            ItemCarrinho item = cellData.getValue();
+            Produto produto = item.getProduto();
+            double percentualDesconto = descontoDAO.obterPorcentagemDesconto(Integer.parseInt(produto.getId()));
 
-        try (Connection connection = dbManager.connect()) {
-            produtoDAO = new ProdutoDAO(connectionFactory);
-            categoriaDAO = new CategoriaDAO(connectionFactory);
-
-            System.out.println("Conexão com o banco de dados estabelecida.");
-        } catch (SQLException ex) {
-            System.err.println("Erro ao estabelecer a conexão com o banco de dados:");
-            ex.printStackTrace();
-        }
-    }
-
-    @FXML
-    void finalizarCupomOnClicked(ActionEvent event) {
-
+            if (percentualDesconto > 0) {
+                // Se o produto tem desconto, exibe a porcentagem de desconto
+                return new SimpleStringProperty(percentualDesconto + "%");
+            } else {
+                // Se não tem desconto, exibe "Sem desconto"
+                return new SimpleStringProperty("Sem desconto");
+            }
+        });
     }
 
     @FXML
@@ -207,22 +222,24 @@ public class PrimaryController {
 
     @FXML
     void limparCupomOnClicked(ActionEvent event) {
-        // Crie uma nova instância da classe principal
         App newApp = new App();
 
-        // Crie um novo estágio para a nova instância
         Stage newPrimaryStage = new Stage();
 
-        // Chame o método start da nova instância
         try {
             newApp.start(newPrimaryStage);
         } catch (IOException e) {
-            e.printStackTrace(); // Trate a exceção conforme necessário
+            e.printStackTrace();
         }
 
-        // Feche o estágio anterior (o estágio atual)
+        // Fechando o estágio anterior (o estágio atual)
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         currentStage.close();
+
+        // Fechando a conexão com o banco de dados
+        if (categoriaDAO != null) {
+            categoriaDAO.closeConnection();
+        }
     }
 
     @FXML // Evento de leitura do codigo de barras
@@ -278,6 +295,9 @@ public class PrimaryController {
         Produto produto = produtoDAO.getByCodBarras(codBarras);
 
         if (produto != null) {
+            // Verifica se o produto tem desconto
+            boolean temDesconto = produtoDAO.produtoTemDesconto(Integer.parseInt(produto.getId()));
+
             // Verifica se o produto já está no carrinho
             Optional<ItemCarrinho> itemExistente = itensCarrinho.stream()
                     .filter(item -> item.getProduto().getId().equals(produto.getId()))

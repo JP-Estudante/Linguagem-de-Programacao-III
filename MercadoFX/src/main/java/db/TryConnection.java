@@ -7,10 +7,10 @@ import java.sql.SQLException;
 
 public class TryConnection {
     public static void main(String[] args) {
-        SQLiteDBManager dbManager = new SQLiteDBManager();
+        ConnectionFactory connectionFactory = new ConnectionFactory();
 
         // Obtém a conexão
-        try (Connection connection = dbManager.connect()) {
+        try (Connection connection = connectionFactory.getConnection()) {
             // Realiza uma busca simples na tabela Produto
             String sql = "SELECT * FROM Produto LIMIT 1";
 
@@ -28,8 +28,6 @@ public class TryConnection {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            dbManager.disconnect();
         }
     }
 }

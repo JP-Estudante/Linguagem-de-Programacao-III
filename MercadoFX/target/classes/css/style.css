@@ -1,7 +1,6 @@
 /* ⚠️ BOTÕES ⚠️ */
 /* Estilo básico para botões */
 .button {
-    -fx-background-color: #f4a261;
     -fx-background-radius: 5;
     -fx-border-width: 1;
     -fx-padding: 10 20;
@@ -31,44 +30,58 @@
 /* ⚠️ TABELAS ⚠️ */
 /* Estilo para a tabela */
 .table-view {
-    -fx-control-inner-background: #CAD2C5; /* Cor de fundo do item selecionado */
-    -fx-table-cell-border-color: #CAD2C5; /* Remove a borda entre as células */
-    -fx-selection-bar: #b4bdae; /* Cor de fundo da barra de seleção (quando selecionado) */
-    -fx-background-color: #CAD2C5; /* Fundo transparente */
+    -fx-control-inner-background: #CAD2C5;
+    /* Cor de fundo do item selecionado */
+    -fx-table-cell-border-color: #CAD2C5;
+    /* Remove a borda entre as células */
+    -fx-selection-bar: #b4bdae;
+    /* Cor de fundo da barra de seleção (quando selecionado) */
+    -fx-background-color: #CAD2C5;
+    /* Fundo transparente */
 
 }
 
 /* Estilo para as células da TableView */
 .table-cell {
-    -fx-padding: 10; /* Espaçamento interno */
-    -fx-font-size: 16px; /* Tamanho da fonte */
+    -fx-padding: 10;
+    /* Espaçamento interno */
+    -fx-font-size: 16px;
+    /* Tamanho da fonte */
 }
 
 .table-view .table-cell {
-    -fx-border-color: transparent; /* Cor das linhas das células */
+    -fx-border-color: transparent;
+    /* Cor das linhas das células */
 }
 
 /* Estilo para o cabeçalho das colunas */
 .table-view .column-header {
-    -fx-background-color: #52796f; /* Cor de fundo do cabeçalho das colunas */
+    -fx-background-color: #52796f;
+    /* Cor de fundo do cabeçalho das colunas */
 }
 
 /* Estilo para todas as células vazias */
 .table-view .table-cell:empty {
-    -fx-background-color: #CAD2C5; /* Cor de fundo para células vazias */
+    -fx-background-color: #CAD2C5;
+    /* Cor de fundo para células vazias */
 }
 
 /* Estilo para as células da TableView */
 .table-cell {
-    -fx-padding: 10; /* Espaçamento interno */
-    -fx-font-size: 18px; /* Tamanho da fonte */
+    -fx-padding: 10;
+    /* Espaçamento interno */
+    -fx-font-size: 18px;
+    /* Tamanho da fonte */
 }
 
 /* Estilo para as células selecionadas */
 .table-view .table-row-cell:selected {
-    -fx-background-color: #b4bdae; /* Cor de fundo quando selecionado */
-    -fx-text-fill: #fcbf49; /* Cor do texto quando selecionado */
-    -fx-font-size: 18px; /* Tamanho da fonte */
+    -fx-background-color: #b4bdae;
+    /* Cor de fundo quando selecionado */
+    -fx-text-fill: #fcbf49;
+    /* Cor do texto quando selecionado */
+    -fx-font-size: 18px;
+    /* Tamanho da fonte */
     -fx-background-insets: 0;
 }
 
@@ -115,11 +128,60 @@
 
 
 
+/* ⚠️ ACCORDION ⚠️ */
+/* Estilizando o Accordion */
+.accordion {
+    -fx-spacing: 20;
+    /* Espaçamento entre os TitledPanes */
+    -fx-font-size: 24px;
+}
+
+/* Estilizando os TitledPanes dentro do Accordion */
+.titled-pane {
+    -fx-border-color: transparent;
+    /* Cor da borda padrão */
+    -fx-border-width: 1;
+    /* Largura da borda padrão */
+    -fx-border-radius: 5;
+    /* Raio da borda padrão */
+}
+
+.titled-pane .title {
+    -fx-background-color: #52796F;
+    /* Cor de fundo do título padrão */
+}
+
+/* Efeito hover para o TitledPane */
+.titled-pane:hover {
+    -fx-text-fill: #354f52;
+    -fx-background-color: transparent;
+    /* Altere a cor de fundo quando o mouse passa por cima */
+    -fx-background-radius: 5;
+    /* Raio da borda quando o mouse passa por cima */
+}
+
+.titled-pane:hover .title {
+    -fx-background-color: #84a98c;
+    /* Altere a cor de fundo do título quando o mouse passa por cima */
+}
+
+/* Personalizando a seta do TitledPane quando aberto */
+.titled-pane:expanded .arrow {
+    -fx-background-color: transparent;
+}
+
+/* Personalizando a seta do TitledPane quando fechado */
+.titled-pane:collapsed .arrow {
+    -fx-background-color: transparent;
+}
+
+
+
 
 /* ⚠️ CONTEINERS ⚠️ */
-/* Estilo para HBox com a cor #f4a261 */
+/* Estilo para HBox com a cor #52796f */
 .hbox-com-cor {
-    -fx-background-color: #f4a261;
+    -fx-background-color: #52796f;
 }
 
 .menu-collor-light {
@@ -133,4 +195,3 @@
 .font-collor {
     -fx-text-fill: #fcbf49;
 }
-

@@ -114,12 +114,60 @@
 
 
 
+/* ⚠️ ACCORDION ⚠️ */
+/* Estilizando o Accordion */
+.accordion {
+    -fx-spacing: 20;
+    /* Espaçamento entre os TitledPanes */
+    -fx-font-size: 24px;
+}
+
+/* Estilizando os TitledPanes dentro do Accordion */
+.titled-pane {
+    -fx-border-color: transparent;
+    /* Cor da borda padrão */
+    -fx-border-width: 1;
+    /* Largura da borda padrão */
+    -fx-border-radius: 5;
+    /* Raio da borda padrão */
+}
+
+.titled-pane .title {
+    -fx-background-color: #52796F;
+    /* Cor de fundo do título padrão */
+}
+
+/* Efeito hover para o TitledPane */
+.titled-pane:hover {
+    -fx-text-fill: #354f52;
+    -fx-background-color: transparent;
+    /* Altere a cor de fundo quando o mouse passa por cima */
+    -fx-background-radius: 5;
+    /* Raio da borda quando o mouse passa por cima */
+}
+
+.titled-pane:hover .title {
+    -fx-background-color: #84a98c;
+    /* Altere a cor de fundo do título quando o mouse passa por cima */
+}
+
+/* Personalizando a seta do TitledPane quando aberto */
+.titled-pane:expanded .arrow {
+    -fx-background-color: transparent;
+}
+
+/* Personalizando a seta do TitledPane quando fechado */
+.titled-pane:collapsed .arrow {
+    -fx-background-color: transparent;
+}
+
+
 
 
 /* ⚠️ CONTEINERS ⚠️ */
-/* Estilo para HBox com a cor #f4a261 */
+/* Estilo para HBox com a cor #52796f */
 .hbox-com-cor {
-    -fx-background-color: #f4a261;
+    -fx-background-color: #52796f;
 }
 
 .menu-collor-light {

@@ -25,8 +25,8 @@ public class App extends Application {
 
     public void start(Stage stage) throws IOException {
         primaryStage = stage;
-        // scene = new Scene(loadFXML("primary"), 640, 480);
-        scene = new Scene(loadFXML("if_interface"), 640, 480);
+        scene = new Scene(loadFXML("primary"), 1920, 1080);
+        // scene = new Scene(loadFXML("if_interface"), 640, 480);
 
         // Carregando um arquivo CSS
         scene.getStylesheets().add(getClass().getResource("table-view.css").toExternalForm());
@@ -41,6 +41,7 @@ public class App extends Application {
         // Icone da janel
         stage.getIcons().add(new Image(getClass().getResourceAsStream("Logo-Xpress.png")));
 
+        stage.setResizable(false);
         stage.setScene(scene);
         stage.setMaximized(true);
         stage.show();

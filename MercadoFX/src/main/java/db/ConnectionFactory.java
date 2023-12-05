@@ -9,6 +9,10 @@ public class ConnectionFactory {
     private Connection connection = null;
     private String databaseName = "mydatabase.db";
 
+    public ConnectionFactory() {
+        // Inicialização, se necessário
+    }
+
     // Método para obter a conexão
     public Connection getConnection() throws SQLException {
         try {
@@ -18,7 +22,7 @@ public class ConnectionFactory {
         } catch (SQLException e) {
             System.err.println("Erro ao verificar o estado da conexão: " + e.getMessage());
             e.printStackTrace();
-            throw e; // Propague a exceção para que quem chama possa lidar com ela adequadamente
+            throw e;
         }
         return connection;
     }
@@ -53,4 +57,5 @@ public class ConnectionFactory {
         }
     }
 }
+
 

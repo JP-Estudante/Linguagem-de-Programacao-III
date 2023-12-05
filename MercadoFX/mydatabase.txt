@@ -1,0 +1,161 @@
+CREATE TABLE Categoria (
+	id_categoria INTEGER PRIMARY KEY AUTOINCREMENT,
+	nome_categoria VARCHAR(40)
+);
+
+CREATE TABLE Cliente (
+	id_cliente INTEGER PRIMARY KEY AUTOINCREMENT,
+	nome_completo VARCHAR(80),
+	cpf VARCHAR(11) UNIQUE
+);
+
+CREATE TABLE Produto (
+    id_produto INTEGER PRIMARY KEY AUTOINCREMENT,    
+    nome_produto VARCHAR(100),
+    valor_produto DECIMAL(5, 2),
+	id_categoria INTEGER,
+	cod_barras VARCHAR(12),
+	
+	FOREIGN KEY (id_categoria) REFERENCES Categoria(id_categoria)
+);
+
+CREATE TABLE Venda (
+    id_venda INTEGER PRIMARY KEY AUTOINCREMENT,
+    id_cliente INTEGER,
+    horario TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    forma_pagamento VARCHAR(50),
+    cupom_desconto VARCHAR(20),
+    valor_total DECIMAL(10, 2),
+    valor_final DECIMAL(10, 2),
+    valor_descontado DECIMAL(10, 2),
+    valor_recebido DECIMAL(10, 2),
+    valor_troco DECIMAL(10, 2),
+    
+    FOREIGN KEY (id_cliente) REFERENCES Cliente(id_cliente)
+);
+
+CREATE TABLE ItemVenda (
+	id_item_venda INTEGER PRIMARY KEY AUTOINCREMENT,
+	id_produto INTEGER,
+	id_venda INTEGER,
+	quantidade INTEGER,
+	valor DECIMAL(10, 2)
+);
+
+CREATE TABLE Desconto (
+    id_desconto INTEGER PRIMARY KEY AUTOINCREMENT,
+    id_produto INTEGER,        
+    id_categoria INTEGER,
+    percentual DECIMAL(5, 2),
+    cupom VARCHAR(20),
+    data_inicio DATE,
+    data_fim DATE,
+    
+    FOREIGN KEY (id_produto) REFERENCES Produto(id_produto),
+    FOREIGN KEY (id_categoria) REFERENCES Categoria(id_categoria)
+);
+
+CREATE TABLE ItemDesconto (
+    id_item_desconto INTEGER PRIMARY KEY AUTOINCREMENT,
+    id_desconto INTEGER,
+    id_venda INTEGER,
+    percentual DECIMAL(5, 2),
+    valor_descontado DECIMAL(10, 2),
+    
+    FOREIGN KEY (id_desconto) REFERENCES Desconto(id_desconto),
+    FOREIGN KEY (id_venda) REFERENCES Venda(id_venda)
+);
+
+
+/* ALGUMAS INSERÇÕES DE DADOS */
+-- Inserindo Descontos para Produtos
+INSERT INTO Desconto (id_produto, percentual, cupom, data_inicio, data_fim) VALUES 
+  (1, 10.00, 'DESC10MA', '2023-12-05', '2023-12-12'),  -- Válido para esta semana
+  (4, 5.00, 'DESC5TO', '2023-12-05', '2024-01-05'),    -- Válido até o início de 2024
+  (7, 8.00, 'FRANGO8OFF', '2023-12-05', '2023-12-12'), -- Válido para esta semana
+  (11, 15.00, 'LEITE15', '2023-11-01', '2023-12-30'),  -- Válido até semana que vem
+  (14, 10.00, 'SUCO10', '2023-11-01', '2023-11-30'),   -- Cupom Vencido
+  (18, 5.00, 'PÃO5OFF', '2023-11-01', '2023-11-30'),   -- Cupom Vencido
+  (21, 12.00, 'SHAMPOO12', '2023-11-01', '2023-11-30'); -- Cupom Vencido
+
+-- Inserindo Descontos para Categorias
+INSERT INTO Desconto (id_categoria, percentual, cupom, data_inicio, data_fim) VALUES 
+  (1, 5.00, 'CATEG5OFF', '2023-12-05', '2023-12-12'),    -- Válido para esta semana
+  (2, 10.00, 'VEG10', '2023-12-05', '2024-01-05'),       -- Válido até o início de 2024
+  (3, 7.00, 'FRANGO7', '2023-12-05', '2023-12-12'),      -- Válido para esta semana
+  (4, 15.00, 'LATIC15', '2023-11-01', '2023-12-30'),     -- Válido até semana que vem
+  (5, 8.00, 'BEBIDA8OFF', '2023-11-01', '2023-11-30'),   -- Cupom Vencido
+  (6, 5.00, 'LIMPEZA5OFF', '2023-11-01', '2023-11-30'),  -- Cupom Vencido
+  (7, 12.00, 'PÃO12OFF', '2023-11-01', '2023-11-30'),    -- Cupom Vencido
+  (8, 10.00, 'HIGIENE10', '2023-11-01', '2023-11-30');   -- Cupom Vencido
+  
+-- Inserindo Categorias
+INSERT INTO Categoria (nome_categoria) VALUES 
+  ('Frutas'),
+  ('Vegetais'),
+  ('Carnes'),
+  ('Laticínios'),
+  ('Bebidas'),
+  ('Produtos de Limpeza'),
+  ('Padaria'),
+  ('Higiene Pessoal');
+
+-- Inserindo Produtos
+INSERT INTO Produto (nome_produto, valor_produto, id_categoria, cod_barras) VALUES 
+  ('Maçã', 2.49, 1, '123400001000'),
+  ('Banana', 1.99, 1, '123400009000'),
+  ('Morango', 3.99, 1, '123400010000'),
+  
+  ('Tomate', 1.99, 2, '123400002000'),
+  ('Cenoura', 0.89, 2, '123400011000'),
+  ('Alface', 1.29, 2, '123400012000'),
+  
+  ('Peito de Frango', 8.99, 3, '123400003000'),
+  ('Coxa de Frango', 7.49, 3, '123400013000'),
+  ('Asa de Frango', 6.99, 3, '123400014000'),
+  
+  ('Leite', 3.49, 4, '123400004000'),
+  ('Iogurte', 2.79, 4, '123400015000'),
+  ('Queijo', 4.99, 4, '123400016000'),
+  
+  ('Suco de Laranja', 5.99, 5, '123400005000'),
+  ('Suco de Uva', 4.49, 5, '123400017000'),
+  ('Refrigerante', 1.99, 5, '123400018000'),
+  
+  ('Detergente', 2.29, 6, '123400006000'),
+  ('Sabão em Pó', 3.79, 6, '123400019000'),
+  ('Amaciante', 2.49, 6, '123400020000'),
+  
+  ('Pão Francês', 1.49, 7, '123400007000'),
+  ('Baguete', 2.19, 7, '123400021000'),
+  ('Pão Integral', 1.89, 7, '123400022000'),
+  
+  ('Sabonete', 2.99, 8, '123400008000'),
+  ('Shampoo', 5.49, 8, '123400023000'),
+  ('Creme Dental', 1.79, 8, '123400024000');
+
+
+ 
+-- Inserindo Clientes
+INSERT INTO Cliente (nome_completo, cpf) VALUES 
+  ('João da Silva', '12345678901'),
+  ('Maria Oliveira', '98765432101'),
+  ('Pedro Santos', '11122233301'),
+  ('Ana Pereira', '44455566601');
+
+
+/* EXCLUIR TODOS OS DADOS
+-- Desconecte as tabelas estrangeiras para evitar erros
+PRAGMA foreign_keys = OFF;
+
+-- Exclua as tabelas
+DROP TABLE IF EXISTS ItemDesconto;
+DROP TABLE IF EXISTS Desconto;
+DROP TABLE IF EXISTS ItemVenda;
+DROP TABLE IF EXISTS Venda;
+DROP TABLE IF EXISTS Produto;
+DROP TABLE IF EXISTS Categoria;
+DROP TABLE IF EXISTS Cliente;
+
+-- Restaure as configurações originais das chaves estrangeiras
+PRAGMA foreign_keys = ON;
