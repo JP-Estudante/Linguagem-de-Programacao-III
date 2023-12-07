@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.effect.BoxBlur;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -52,13 +53,13 @@ public class App extends Application {
             return;
         }
 
-        openSecondaryWindow(connection);
-
         // Configurando a referência de App no DinheiroController
         FXMLLoader dinheiroLoader = new FXMLLoader(getClass().getResource("dinheiro.fxml"));
         Parent dinheiroRoot = dinheiroLoader.load();
         dinheiroController = dinheiroLoader.getController();
         dinheiroController.setApp(this);
+        
+        openSecondaryWindow(connection);
     }
 
     static void setPrimaryStage(Stage stage) {
@@ -87,19 +88,25 @@ public class App extends Application {
         cartaoStage.initOwner(primaryStage);
         cartaoStage.setScene(new Scene(root));
 
-        // Adiciona um listener para detectar quando a janela Cartao está fechada
-        cartaoStage.setOnHidden(event -> {
-            // Remove o efeito de desfoque quando a janela Cartao é fechada
-            scene.getRoot().setEffect(null);
+        cartaoStage.getScene().setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ESCAPE) {
+                cartaoStage.close();
+                scene.getRoot().setEffect(null);
+            }
         });
 
-        // Adiciona um listener para detectar quando a janela Cartao está sendo
-        // exibida
+        // Listener para quando a janela está fechada
+        cartaoStage.setOnHidden(event -> {
+            scene.getRoot().setEffect(null); // Remove o efeito
+        });
+
+        // Listener para quando a janela está aparecendo
         cartaoStage.setOnShowing(event -> {
-            // Adiciona o efeito de desfoque quando a janela Cartao está sendo exibida
-            BoxBlur blur = new BoxBlur(2.6, 2.6, 2);
+            BoxBlur blur = new BoxBlur(2.6, 2.6, 2); // Adiciona o efeito
             scene.getRoot().setEffect(blur);
         });
+
+        cartaoStage.centerOnScreen();
 
         cartaoStage.show();
     }
@@ -108,7 +115,7 @@ public class App extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("dinheiro.fxml"));
         Parent root = fxmlLoader.load();
 
-        dinheiroController.initialize(connection);
+        DinheiroController dinheiroController = fxmlLoader.getController();
 
         Stage dinheiroStage = new Stage();
         dinheiroStage.initStyle(StageStyle.UNDECORATED);
@@ -116,19 +123,25 @@ public class App extends Application {
         dinheiroStage.initOwner(primaryStage);
         dinheiroStage.setScene(new Scene(root));
 
-        // Adiciona um listener para detectar quando a janela Dinheiro está fechada
+        dinheiroStage.getScene().setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ESCAPE) {
+                dinheiroStage.close();
+                scene.getRoot().setEffect(null);
+            }
+        });
+
+        // Listener para quando a janela está fechada
         dinheiroStage.setOnHidden(event -> {
-            // Remove o efeito de desfoque quando a janela Dinheiro é fechada
             scene.getRoot().setEffect(null);
         });
 
-        // Adiciona um listener para detectar quando a janela Dinheiro está sendo
-        // exibida
+        // Listener para quando a janela está aparecendo
         dinheiroStage.setOnShowing(event -> {
-            // Adiciona o efeito de desfoque quando a janela Dinheiro está sendo exibida
-            BoxBlur blur = new BoxBlur(2.6, 2.6, 2);
+            BoxBlur blur = new BoxBlur(2.6, 2.6, 2); // Adiciona o efeito
             scene.getRoot().setEffect(blur);
         });
+
+        dinheiroStage.centerOnScreen();
 
         dinheiroStage.show();
     }
@@ -149,28 +162,29 @@ public class App extends Application {
 
         secondaryStage.setScene(new Scene(root));
 
-        // Adiciona um listener para detectar quando a janela Secondary está sendo
-        // exibida
+        secondaryStage.getScene().setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ESCAPE) {
+                secondaryStage.close();
+                scene.getRoot().setEffect(null);
+            }
+        });
+
+        // Listener para quando a janela está aparecendo
         secondaryStage.setOnShowing(event -> {
-            // Adiciona o efeito de desfoque quando a janela Secondary está sendo exibida
-            BoxBlur blur = new BoxBlur(2.6, 2.6, 2);
+            BoxBlur blur = new BoxBlur(2.6, 2.6, 2); // Adiciona o efeito
             scene.getRoot().setEffect(blur);
         });
 
-        // Adiciona um listener para detectar quando a janela Secondary está sendo
-        // fechada
+        // Listener para quando a janela está fechada
         secondaryStage.setOnHidden(event -> {
-            // Remove o efeito de desfoque quando a janela Secondary é fechada
-            scene.getRoot().setEffect(null);
+            scene.getRoot().setEffect(null); // Remove o efeito
         });
 
-        // Definindo a posição da janela secundária
         secondaryStage.centerOnScreen();
 
         secondaryController.setSecondaryStage(secondaryStage);
         secondaryController.initialize(connection);
 
-        // Reduz a opacidade da janela principal
         secondaryStage.show();
     }
 

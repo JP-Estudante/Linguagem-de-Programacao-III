@@ -37,7 +37,7 @@
               </rowConstraints>
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: Segoe UI Symbol; -fx-font-size: 26; -fx-fill: #84A98C; -fx-font-weight: bold; -fx-font-style: italic;" text="Nome:" wrappingWidth="95.4609375" />
-                  <Text fx:id="nomeClienteLabel" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: Segoe UI Symbol; -fx-font-size: 20; -fx-fill: #84A98C; -fx-font-weight: bold; -fx-font-style: italic;" text="Nenhum" wrappingWidth="538.4609375" GridPane.columnIndex="1">
+                  <Text fx:id="nomeClienteLabel" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: Segoe UI Symbol; -fx-font-size: 20; -fx-fill: #84A98C; -fx-font-weight: bold; -fx-font-style: italic;" text="Nenhum" visible="false" wrappingWidth="538.4609375" GridPane.columnIndex="1">
                      <GridPane.margin>
                         <Insets bottom="-5.0" />
                      </GridPane.margin>
@@ -266,7 +266,7 @@
    <bottom>
       <AnchorPane prefHeight="92.0" prefWidth="1129.0" styleClass="menu-collor-light" stylesheets="@../css/aesthetic.css" BorderPane.alignment="CENTER">
          <children>
-            <Text layoutX="394.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: Impact; -fx-font-size: 40; -fx-fill: #84A98C;" text="Status..." textAlignment="CENTER" wrappingWidth="581.24609375" AnchorPane.bottomAnchor="22.5625" AnchorPane.leftAnchor="394.0" AnchorPane.rightAnchor="394.75390625" AnchorPane.topAnchor="20.6484375" />
+            <Text fx:id="statusCupom" layoutX="394.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: Impact; -fx-font-size: 40; -fx-fill: #84A98C;" text="Status..." textAlignment="CENTER" visible="false" wrappingWidth="581.24609375" AnchorPane.bottomAnchor="22.5625" AnchorPane.leftAnchor="394.0" AnchorPane.rightAnchor="394.75390625" AnchorPane.topAnchor="20.6484375" />
             <ImageView fitHeight="77.0" fitWidth="192.0" layoutX="56.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../icons/logo-system.png" />

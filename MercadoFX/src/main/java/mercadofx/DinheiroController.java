@@ -1,12 +1,9 @@
 package mercadofx;
 
 import java.net.URL;
-import java.sql.Connection;
 import java.util.ResourceBundle;
 
-import DAO.CategoriaDAO;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
@@ -16,22 +13,7 @@ public class DinheiroController implements Initializable {
 
     private Stage dinheiroStage;
     private App app;
-
-    public DinheiroController() {
-        
-    }
-
-    public DinheiroController(CategoriaDAO categoriaDAO) {
-        this.categoriaDAO = categoriaDAO;
-    }
-
-    public void setDinheiroStage(Stage dinheiroStage) {
-        this.dinheiroStage = dinheiroStage;
-    }
-
-    public void setApp(App app) {
-        this.app = app;
-    }
+    private String valorTotal;
 
     @FXML
     private TextField cupomTextField;
@@ -48,21 +30,41 @@ public class DinheiroController implements Initializable {
     @FXML
     private TextField valorTotalTextField;
 
-    private CategoriaDAO categoriaDAO;
+    public DinheiroController() {
+    }
+
+    public void setDinheiroStage(Stage dinheiroStage) {
+        this.dinheiroStage = dinheiroStage;
+    }
+
+    public void setApp(App app) {
+        this.app = app;
+    }
+
+    public void setValorTotal(String valorTotal) {
+        this.valorTotal = valorTotal;
+        valorTotalTextField.setText(valorTotal);
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // Defina o foco no TextField desejado
         Platform.runLater(() -> valorRecebidoTextField.requestFocus());
+
+        PrimaryController.addOnChangeScreenListener((newScreen, userData) -> {
+            // Verifica se a nova tela é o DinheiroController
+            if ("DinheiroController".equals(newScreen)) {
+
+                String valorTotal = (String) userData;
+                setValorTotal(valorTotal);
+            }
+        });
     }
 
     @FXML
-    void finalizarCupom(ActionEvent event) {
-        // Fecha o aplicativo
+    void finalizarCupom() {
         Platform.exit();
     }
-    
 
-    public void initialize(Connection connection) {
-    }
+
 }

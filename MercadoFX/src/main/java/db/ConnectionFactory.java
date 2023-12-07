@@ -10,7 +10,7 @@ public class ConnectionFactory {
     private String databaseName = "mydatabase.db";
 
     public ConnectionFactory() {
-        // Inicialização, se necessário
+        
     }
 
     // Método para obter a conexão

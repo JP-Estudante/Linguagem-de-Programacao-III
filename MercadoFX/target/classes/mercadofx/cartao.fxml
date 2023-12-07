@@ -9,8 +9,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Text?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="470.0" prefWidth="360.0" styleClass="menu-collor-solid" stylesheets="@../css/pagamentos.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mercadofx.CartaoController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="360.0" styleClass="menu-collor-solid" stylesheets="@../css/pagamentos.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mercadofx.CartaoController">
    <children>
       <Label layoutX="56.0" layoutY="126.0" text="Vlr. Total:">
          <styleClass>
@@ -49,7 +48,7 @@
             <String fx:value="checkout-values-field" />
          </styleClass>
       </TextField>
-      <Button disable="true" layoutX="117.0" layoutY="406.0" mnemonicParsing="false" onAction="#finalizarCupom" text="Finalizar">
+      <Button layoutX="117.0" layoutY="406.0" mnemonicParsing="false" onAction="#finalizarCupom" text="Finalizar">
          <styleClass>
             <String fx:value="font-collor" />
             <String fx:value="menu-collor-solid" />
@@ -60,5 +59,11 @@
             <Image url="@../icons/card-icon.png" />
          </image>
       </ImageView>
+      <Label layoutX="118.0" layoutY="462.0" text="ESC = Abortar">
+         <styleClass>
+            <String fx:value="font-collor" />
+            <String fx:value="checkout-values" />
+         </styleClass>
+      </Label>
    </children>
 </Pane>

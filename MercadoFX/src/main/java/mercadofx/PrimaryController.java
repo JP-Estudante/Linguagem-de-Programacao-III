@@ -1,22 +1,21 @@
 package mercadofx;
 
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 import db.ConnectionFactory;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -27,7 +26,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.effect.BoxBlur;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
@@ -55,10 +53,17 @@ public class PrimaryController {
     }
 
     @FXML
+    private Text statusCupom;
+
+    @FXML
     private Text nomeClienteLabel;
 
     @FXML
     private TextField vlrTotlTextField;
+
+    public String getValorTotal() {
+        return vlrTotlTextField.getText();
+    }
 
     @FXML
     private TextField vlrVendTextField;
@@ -96,6 +101,8 @@ public class PrimaryController {
 
     @FXML
     public void initialize() {
+        Platform.runLater(() -> codBarrasTextField.requestFocus());
+
         connectionFactory = new ConnectionFactory();
 
         try {
@@ -180,10 +187,8 @@ public class PrimaryController {
                     if (empty || categoria == null) {
                         setText(null);
                     } else {
-                        // Verifique se categoriaDAO não é nulo antes de tentar obter o nome da
-                        // categoria
                         if (categoriaDAO != null) {
-                            // Adicione mensagens de depuração para verificar o valor de categoria
+                            // Mensagens de depuração para o valor de categoria
                             System.out.println("Categoria: " + categoria.getNomeCategoria());
 
                             setText(categoria.getNomeCategoria());
@@ -197,17 +202,40 @@ public class PrimaryController {
 
         // Configuração da Coluna Desconto
         colunaDesconto.setCellValueFactory(cellData -> {
-
             ItemCarrinho item = cellData.getValue();
             Produto produto = item.getProduto();
             double percentualDesconto = descontoDAO.obterPorcentagemDesconto(Integer.parseInt(produto.getId()));
 
             if (percentualDesconto > 0) {
-                return new SimpleStringProperty(percentualDesconto + "%");
+                // Formata a porcentagem para remover o zero após a casa decimal
+                DecimalFormat decimalFormat = new DecimalFormat("#.#");
+                String percentualFormatado = decimalFormat.format(percentualDesconto);
+
+                return new SimpleStringProperty(percentualFormatado + "%");
             } else {
                 return new SimpleStringProperty("Sem desconto");
             }
         });
+    }
+
+    private static List<OnChangeScreenListener> listeners = new ArrayList<>();
+
+    public static interface OnChangeScreenListener {
+        void onScreenChanged(String newScreen, Object userData);
+    }
+
+    public static void addOnChangeScreenListener(OnChangeScreenListener listener) {
+        listeners.add(listener);
+    }
+
+    public static void changeScreen(String newScreen, Object userData) {
+        notifyAllListeners(newScreen, userData);
+    }
+
+    public static void notifyAllListeners(String newScreen, Object userData) {
+        for (OnChangeScreenListener listener : listeners) {
+            listener.onScreenChanged(newScreen, userData);
+        }
     }
 
     @FXML
@@ -225,6 +253,10 @@ public class PrimaryController {
     @FXML
     void pagarEmDinheiro(ActionEvent event) {
         try {
+            String valorTotal = vlrTotlTextField.getText();
+
+            notifyAllListeners("DinheiroController", valorTotal);
+
             App.openDinheiroWindow(connection);
         } catch (IOException e) {
             e.printStackTrace();
@@ -238,20 +270,36 @@ public class PrimaryController {
 
         if (itemSelecionado != null) {
             // Subtrai o valor do produto do total acumulado
-            valorTotalAcumulado -= itemSelecionado.getProduto().getValorProduto();
-            vlrTotlTextField.setText(NumberFormat.getCurrencyInstance(Locale.forLanguageTag("pt-BR"))
-                    .format(valorTotalAcumulado));
+            double valorProduto = itemSelecionado.getProduto().getValorProduto();
+            double desconto = itemSelecionado.getDesconto();
+            valorTotalAcumulado -= (valorProduto - (valorProduto * (desconto / 100.0)))
+                    * itemSelecionado.getQuantidade();
+            valorTotalAcumulado = Math.max(valorTotalAcumulado, 0.0);
 
             // Reduz a quantidade do item em 1
             int novaQuantidade = itemSelecionado.getQuantidade() - 1;
 
-            // Se a nova quantidade for maior que zero, atualiza a quantidade no item,
-            // caso contrário, remove o item da lista
+            // Se for maior que zero, atualiza a quantidade, caso contrário, remove o item
             if (novaQuantidade > 0) {
                 itemSelecionado.setQuantidade(novaQuantidade);
             } else {
                 itensCarrinho.remove(itemSelecionado);
             }
+
+            // Recalcula o valor total considerando apenas os itens ainda no carrinho
+            valorTotalAcumulado = itensCarrinho.stream()
+                    .mapToDouble(item -> {
+                        double percentualDesconto = descontoDAO
+                                .obterPorcentagemDesconto(Integer.parseInt(item.getProduto().getId()));
+                        double valorComDesconto = item.getProduto().getValorProduto()
+                                - (item.getProduto().getValorProduto() * (percentualDesconto / 100.0));
+                        return Math.max(valorComDesconto, 0.0) * item.getQuantidade();
+                    })
+                    .sum();
+
+            // Atualiza a exibição do valor total nos TextFields
+            vlrTotlTextField.setText(
+                    NumberFormat.getCurrencyInstance(Locale.forLanguageTag("pt-BR")).format(valorTotalAcumulado));
 
             // Atualiza a TableView
             tabelaProdutos.setItems(itensCarrinho);
@@ -259,7 +307,6 @@ public class PrimaryController {
 
             // Atualiza os campos qtdTextField e vlrVendTextField
             atualizarCampos();
-
         } else {
             System.out.println("Nenhum item selecionado para cancelar.");
         }
@@ -297,7 +344,7 @@ public class PrimaryController {
 
     @FXML // Evento de seleção de linha
     void linhaSelecionadaMouse(MouseEvent event) {
-        if (event.getClickCount() == 1) // Verifica se é um clique único
+        if (event.getClickCount() == 1)
             mostrarValoresLinhaSelecionada();
     }
 
@@ -337,6 +384,8 @@ public class PrimaryController {
     }
 
     public void buscarProdutoComCodBarras(String codBarras) {
+        statusCupom.setVisible(false);
+
         Produto produto = produtoDAO.getByCodBarras(codBarras);
 
         if (produto != null) {
@@ -352,19 +401,22 @@ public class PrimaryController {
                 ItemCarrinho itemCarrinhoExistente = itemExistente.get();
                 itemCarrinhoExistente.setQuantidade(itemCarrinhoExistente.getQuantidade() + 1);
 
-                // Aplica desconto de 12% para quantidade maior ou igual a 6
-                if (itemCarrinhoExistente.getQuantidade() >= 6 && itemCarrinhoExistente.getDesconto() == 0.0) {
-                    double percentualDesconto = 12.0;
-                    itemCarrinhoExistente.setDesconto(percentualDesconto);
-                    System.out.println("12%");
-                }
-
                 tabelaProdutos.refresh();
 
                 System.out.println("Produto existente no carrinho. Quantidade atualizada.");
             } else {
                 // Se o produto não está no carrinho, adiciona como um novo item
                 ItemCarrinho novoItem = new ItemCarrinho(produto, 1);
+
+                // Verifica se o produto possui desconto e exibe a porcentagem
+                double percentualDesconto = descontoDAO.obterPorcentagemDesconto(Integer.parseInt(produto.getId()));
+                if (percentualDesconto > 0) {
+                    DecimalFormat decimalFormat = new DecimalFormat("#.#");
+                    String percentualFormatado = decimalFormat.format(percentualDesconto);
+
+                    statusCupom.setVisible(true);
+                    statusCupom.setText(percentualFormatado + "% de desconto aplicado!");
+                }
 
                 itensCarrinho.add(novoItem);
                 System.out.println("Novo produto adicionado ao carrinho.");
@@ -390,6 +442,10 @@ public class PrimaryController {
             vlrTotlTextField.setText(NumberFormat.getCurrencyInstance(Locale.forLanguageTag("pt-BR"))
                     .format(valorTotalAcumulado));
         } else {
+            // Produto não encontrado
+            statusCupom.setVisible(true);
+            statusCupom.setText("Produto não encontrado!");
+
             System.out.println("Produto não encontrado para o código de barras: " + codBarras);
         }
     }

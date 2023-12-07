@@ -9,8 +9,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Text?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="470.0" prefWidth="360.0" styleClass="menu-collor-solid" stylesheets="@../css/pagamentos.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mercadofx.DinheiroController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="360.0" styleClass="menu-collor-solid" stylesheets="@../css/pagamentos.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mercadofx.DinheiroController">
    <children>
       <TextField fx:id="cupomTextField" layoutX="114.0" layoutY="345.0" prefHeight="39.0" prefWidth="222.0">
          <styleClass>
@@ -24,50 +23,50 @@
             <String fx:value="checkout-values" />
          </styleClass>
       </Label>
-      <Label layoutX="21.0" layoutY="209.0" text="Vlr. Total:">
+      <Label layoutX="34.0" layoutY="79.0" text="Vlr. Total:">
          <styleClass>
             <String fx:value="font-collor" />
             <String fx:value="checkout-values" />
          </styleClass>
       </Label>
-      <TextField fx:id="valorTotalTextField" disable="true" layoutX="129.0" layoutY="203.0" prefHeight="16.0" prefWidth="135.0" style="-fx-opacity: 1;">
+      <TextField fx:id="valorTotalTextField" layoutX="161.0" layoutY="74.0" prefHeight="39.0" prefWidth="106.0" style="-fx-opacity: 1;">
          <styleClass>
             <String fx:value="checkout-values" />
             <String fx:value="checkout-values-field" />
          </styleClass>
       </TextField>
       <Text layoutX="23.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: Impact; -fx-fill: #fcbf49; -fx-font-size: 30;" text="Dinheiro" />
-      <Label layoutX="21.0" layoutY="263.0" text="Vlr. Final:">
+      <Label layoutX="33.0" layoutY="261.0" text="Vlr. Final:">
          <styleClass>
             <String fx:value="font-collor" />
             <String fx:value="checkout-values" />
          </styleClass>
       </Label>
-      <TextField fx:id="valorFinalTextField" disable="true" layoutX="128.0" layoutY="263.0" prefHeight="39.0" prefWidth="135.0" style="-fx-opacity: 1;">
+      <TextField fx:id="valorFinalTextField" disable="true" layoutX="123.0" layoutY="255.0" prefHeight="39.0" prefWidth="135.0" style="-fx-opacity: 1;">
          <styleClass>
             <String fx:value="checkout-values" />
             <String fx:value="checkout-values-field" />
          </styleClass>
       </TextField>
-      <Label layoutX="33.0" layoutY="81.0" text="Vlr. Recebido:">
+      <Label layoutX="33.0" layoutY="129.0" text="Vlr. Recebido:">
          <styleClass>
             <String fx:value="font-collor" />
             <String fx:value="checkout-values" />
          </styleClass>
       </Label>
-      <TextField fx:id="valorRecebidoTextField" layoutX="161.0" layoutY="77.0" prefHeight="16.0" prefWidth="135.0">
+      <TextField fx:id="valorRecebidoTextField" layoutX="161.0" layoutY="125.0" prefHeight="39.0" prefWidth="106.0">
          <styleClass>
             <String fx:value="checkout-values" />
             <String fx:value="checkout-values-field" />
          </styleClass>
       </TextField>
-      <Label layoutX="101.0" layoutY="131.0" text="Troco:">
+      <Label layoutX="180.0" layoutY="183.0" text="Troco:">
          <styleClass>
             <String fx:value="font-collor" />
             <String fx:value="checkout-values" />
          </styleClass>
       </Label>
-      <TextField fx:id="trocoTextField" disable="true" layoutX="161.0" layoutY="127.0" prefHeight="16.0" prefWidth="135.0" style="-fx-opacity: 1;">
+      <TextField fx:id="trocoTextField" disable="true" layoutX="240.0" layoutY="177.0" prefHeight="39.0" prefWidth="106.0" style="-fx-opacity: 1;">
          <styleClass>
             <String fx:value="checkout-values" />
             <String fx:value="checkout-values-field" />
@@ -84,5 +83,11 @@
             <Image url="@../icons/cash-icon.png" />
          </image>
       </ImageView>
+      <Label layoutX="128.0" layoutY="472.0" text="ESC = Abortar">
+         <styleClass>
+            <String fx:value="font-collor" />
+            <String fx:value="checkout-values" />
+         </styleClass>
+      </Label>
    </children>
 </Pane>

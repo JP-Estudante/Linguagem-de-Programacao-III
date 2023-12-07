@@ -25,31 +25,29 @@ public class CategoriaDAO {
             System.err.println("Erro ao obter a conexão com o banco de dados: " + e.getMessage());
             e.printStackTrace();
         }
-    }   
+    }
 
     public Categoria getCategoriaById(int id) {
         Categoria categoria = null;
-    
+
         // Query SQL para obter uma categoria pelo ID
         String sql = "SELECT * FROM Categoria WHERE id_categoria = ?";
-    
+
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-            // Substitui o parâmetro na query pelo valor do ID desejado
             preparedStatement.setInt(1, id);
-    
+
             // Executa a query
             ResultSet resultSet = preparedStatement.executeQuery();
-    
+
             // Verifica se há algum resultado
             if (resultSet.next()) {
                 categoria = Categoria.fromResultSet(resultSet);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
-            // Lide com a exceção conforme necessário
-            System.err.println("Erro ao executar a consulta SQL para a categoria: " + e.getMessage());
+            // e.printStackTrace();
+            // System.err.println("Erro ao executar a consulta SQL para a categoria: " + e.getMessage());
         }
-    
+
         return categoria;
     }
 

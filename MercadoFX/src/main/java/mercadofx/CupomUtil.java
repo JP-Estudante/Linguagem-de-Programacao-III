@@ -2,6 +2,7 @@ package mercadofx;
 
 import java.io.IOException;
 
+
 import DAO.CategoriaDAO;
 import javafx.event.ActionEvent;
 import javafx.stage.Stage;
@@ -28,4 +29,5 @@ public class CupomUtil {
             categoriaDAO.closeConnection();
         }
     }
+
 }

@@ -22,8 +22,8 @@ public class DescontoDAO {
     public double obterPorcentagemDesconto(int idProduto) {
         // Obtenha a conexão da ConnectionFactory
         try (Connection connection = connectionFactory.getConnection();
-             PreparedStatement statement = connection.prepareStatement(
-                     "SELECT percentual FROM Desconto WHERE id_produto = ? AND data_inicio <= CURRENT_DATE AND data_fim >= CURRENT_DATE")) {
+                PreparedStatement statement = connection.prepareStatement(
+                        "SELECT percentual FROM Desconto WHERE id_produto = ? AND data_inicio <= CURRENT_DATE AND data_fim >= CURRENT_DATE")) {
             statement.setInt(1, idProduto);
 
             ResultSet resultSet = statement.executeQuery();
@@ -37,14 +37,15 @@ public class DescontoDAO {
             e.printStackTrace();
         }
 
-        // Se não houver desconto, retorne 0.0 ou algum valor padrão
+        // Se não houver desconto
         return 0.0;
     }
 
     public Desconto getDescontoById(int id) {
         // Obtenha a conexão da ConnectionFactory
         try (Connection connection = connectionFactory.getConnection();
-             PreparedStatement statement = connection.prepareStatement("SELECT * FROM Desconto WHERE id_desconto = ?")) {
+                PreparedStatement statement = connection
+                        .prepareStatement("SELECT * FROM Desconto WHERE id_desconto = ?")) {
             statement.setInt(1, id);
 
             ResultSet resultSet = statement.executeQuery();
@@ -61,10 +62,6 @@ public class DescontoDAO {
                     return new DescontoProdutos(idProduto, percentual);
                 } else if (idCategoria != 0) {
                     return new DescontoCategoria(String.valueOf(idCategoria), percentual);
-                } else {
-                    // Lógica para lidar com outros tipos de desconto, se aplicável
-                    // Por exemplo, desconto baseado na quantidade
-                    // return new DescontoQuantidade(quantidadeMinima, percentual);
                 }
             }
         } catch (SQLException e) {

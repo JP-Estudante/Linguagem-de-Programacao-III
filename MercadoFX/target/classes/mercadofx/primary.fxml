@@ -184,7 +184,7 @@
               </rowConstraints>
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: Segoe UI Symbol; -fx-font-size: 30; -fx-fill: #84A98C; -fx-font-weight: bold; -fx-font-style: italic;" text="Cliente:" wrappingWidth="109.4609375" />
-                  <Text fx:id="nomeClienteLabel" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: Segoe UI Symbol; -fx-font-size: 24; -fx-fill: #84A98C; -fx-font-weight: bold; -fx-font-style: italic;" text="Nenhum" wrappingWidth="500.4609375" GridPane.columnIndex="1">
+                  <Text fx:id="nomeClienteLabel" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: Segoe UI Symbol; -fx-font-size: 24; -fx-fill: #84A98C; -fx-font-weight: bold; -fx-font-style: italic;" text="Nenhum" visible="false" wrappingWidth="500.4609375" GridPane.columnIndex="1">
                      <GridPane.margin>
                         <Insets bottom="-6.0" />
                      </GridPane.margin>
@@ -279,7 +279,7 @@
    <bottom>
       <AnchorPane prefHeight="75.0" prefWidth="1352.0" styleClass="menu-collor-light" stylesheets="@../css/style.css" BorderPane.alignment="CENTER">
          <children>
-            <Text layoutX="609.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: Impact; -fx-font-size: 40; -fx-fill: #84A98C;" text="Status..." textAlignment="CENTER" wrappingWidth="701.24609375" />
+            <Text fx:id="statusCupom" disable="true" layoutX="609.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: Impact; -fx-font-size: 40; -fx-fill: #84A98C;" text="Status..." textAlignment="CENTER" visible="false" wrappingWidth="701.24609375" />
          </children>
       </AnchorPane>
    </bottom>

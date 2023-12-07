@@ -13,8 +13,10 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 public class SecondaryController {
+
     private Stage secondaryStage;
     private ClienteDAO clienteDAO;
+    @SuppressWarnings("unused")
     private Connection connection;
 
     private boolean f1KeyPressed = false;
@@ -121,9 +123,6 @@ public class SecondaryController {
                 } else {
                     nomeTextField.setText("Cliente não encontrado");
                 }
-            } else {
-                // Tratar o caso em que a string está vazia após a remoção de caracteres não
-                // numéricos
             }
 
             // Consumir o evento apenas se o cliente for encontrado
@@ -145,25 +144,13 @@ public class SecondaryController {
 
     @FXML // Manipular eventos de teclado (Esc e F1)
     void keyBindsReleased(KeyEvent event) {
-        if (secondaryStage != null) {
-            if (event.getCode() == KeyCode.ESCAPE) {
-                // Ação para a tecla Esc
-                handleCancelAction();
-            } else if (event.getCode() == KeyCode.F1 && event.getEventType() == KeyEvent.KEY_RELEASED
-                    && !f1KeyPressed) {
-                // Ação para a tecla F1
-                handleContinueAction();
-            }
+        if (event.getCode() == KeyCode.F1 && event.getEventType() == KeyEvent.KEY_RELEASED && !f1KeyPressed) {
+            // Ação para a tecla F1
+            handleContinueAction();
         }
     }
 
-    @FXML // Método para lidar com eventos de tecla pressionada
-    void keyBindsPressed(KeyEvent event) {
-        if (event.getCode() == KeyCode.F1) {
-            // Marcar que a tecla F1 foi liberada
-            f1KeyPressed = false;
-        }
-    }
+    // Remova o método keyBindsPressed se não estiver sendo usado.
 
     @FXML // Evento com o botão cancelar
     void handleCancelarButton(ActionEvent event) {
@@ -174,11 +161,6 @@ public class SecondaryController {
     @FXML // Evento com o botão continuar
     void handleContinueButton(ActionEvent event) {
         System.out.println("Venda com cliente!");
-        closeWindow();
-    }
-
-    private void handleCancelAction() {
-        System.out.println("Venda sem cliente!");
         closeWindow();
     }
 
@@ -200,6 +182,12 @@ public class SecondaryController {
         }
     }
 
+    private void closeWindow() {
+        if (secondaryStage != null) {
+            secondaryStage.close();
+        }
+    }
+
     private String formatId(int id) {
         String idStr = String.valueOf(id);
         if (idStr.length() == 1) {
@@ -210,9 +198,4 @@ public class SecondaryController {
         return idStr;
     }
 
-    private void closeWindow() {
-        if (secondaryStage != null) {
-            secondaryStage.close();
-        }
-    }
 }

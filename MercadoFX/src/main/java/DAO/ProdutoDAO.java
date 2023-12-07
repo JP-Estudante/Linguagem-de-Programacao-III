@@ -50,7 +50,6 @@ public class ProdutoDAO {
             System.err.println("Erro ao executar a consulta SQL: " + e.getMessage());
             e.printStackTrace();
         } finally {
-            // Certifique-se de fechar a conexão no bloco finally
             if (connection != null) {
                 try {
                     connection.close();
@@ -60,7 +59,7 @@ public class ProdutoDAO {
             }
         }
 
-        return null; // Retorna null se nenhum produto for encontrado
+        return null;
     }
 
     public boolean produtoTemDesconto(int idProduto) {
@@ -82,7 +81,6 @@ public class ProdutoDAO {
             System.err.println("Erro ao executar a consulta SQL: " + e.getMessage());
             e.printStackTrace();
         } finally {
-            // Certifique-se de fechar a conexão no bloco finally
             if (connection != null) {
                 try {
                     connection.close();

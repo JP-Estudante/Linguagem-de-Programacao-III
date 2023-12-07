@@ -27,7 +27,6 @@ public class CartaoController {
 
     @FXML
     void finalizarCupom(ActionEvent event) {   
-        // Fecha o aplicativo
         Platform.exit();
     }
 
