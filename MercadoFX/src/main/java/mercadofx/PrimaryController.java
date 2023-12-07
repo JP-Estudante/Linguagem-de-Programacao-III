@@ -1,9 +1,15 @@
 package mercadofx;
 
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -15,11 +21,13 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Accordion;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.effect.BoxBlur;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
@@ -39,7 +47,12 @@ public class PrimaryController {
     private CategoriaDAO categoriaDAO;
     private DescontoDAO descontoDAO;
     private Connection connection;
+    private App app;
     private double valorTotalAcumulado = 0.0;
+
+    public void setApp(App app) {
+        this.app = app;
+    }
 
     @FXML
     private Text nomeClienteLabel;
@@ -48,7 +61,7 @@ public class PrimaryController {
     private TextField vlrTotlTextField;
 
     @FXML
-    private TextField vlrUnitTextField;
+    private TextField vlrVendTextField;
 
     @FXML
     private TextField qtdTextField;
@@ -77,6 +90,9 @@ public class PrimaryController {
 
     @FXML
     private TableColumn<ItemCarrinho, String> colunaDesconto;
+
+    @FXML
+    private Accordion finalizarCupomAccordion;
 
     @FXML
     public void initialize() {
@@ -123,10 +139,18 @@ public class PrimaryController {
         });
 
         // Configuração da Coluna Valor Unitário
-        colunaValorUnitario.setCellValueFactory(
-                cellData -> new SimpleObjectProperty<>(cellData.getValue().getProduto().getValorProduto()));
+        colunaValorUnitario.setCellValueFactory(cellData -> {
+            Produto produto = cellData.getValue().getProduto();
+            double percentualDesconto = descontoDAO.obterPorcentagemDesconto(Integer.parseInt(produto.getId()));
+            double valorComDesconto = produto.getValorProduto()
+                    - (produto.getValorProduto() * (percentualDesconto / 100.0));
+            valorComDesconto = Math.max(valorComDesconto, 0.0);
+            return new SimpleObjectProperty<>(valorComDesconto);
+        });
+
         colunaValorUnitario
                 .setCellFactory(new Callback<TableColumn<ItemCarrinho, Double>, TableCell<ItemCarrinho, Double>>() {
+
                     @Override
                     public TableCell<ItemCarrinho, Double> call(TableColumn<ItemCarrinho, Double> param) {
                         return new TableCell<ItemCarrinho, Double>() {
@@ -148,6 +172,7 @@ public class PrimaryController {
         // Configuração da Coluna Categoria
         colunaCategoria.setCellFactory(column -> {
             return new TableCell<ItemCarrinho, Categoria>() {
+
                 @Override
                 protected void updateItem(Categoria categoria, boolean empty) {
                     super.updateItem(categoria, empty);
@@ -172,18 +197,38 @@ public class PrimaryController {
 
         // Configuração da Coluna Desconto
         colunaDesconto.setCellValueFactory(cellData -> {
+
             ItemCarrinho item = cellData.getValue();
             Produto produto = item.getProduto();
             double percentualDesconto = descontoDAO.obterPorcentagemDesconto(Integer.parseInt(produto.getId()));
 
             if (percentualDesconto > 0) {
-                // Se o produto tem desconto, exibe a porcentagem de desconto
                 return new SimpleStringProperty(percentualDesconto + "%");
             } else {
-                // Se não tem desconto, exibe "Sem desconto"
                 return new SimpleStringProperty("Sem desconto");
             }
         });
+    }
+
+    @FXML
+    void pagarComCartao(ActionEvent event) {
+        App appInstance = new App();
+        if (appInstance != null) {
+            try {
+                appInstance.openCartaoWindow(connection);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @FXML
+    void pagarEmDinheiro(ActionEvent event) {
+        try {
+            App.openDinheiroWindow(connection);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -212,7 +257,7 @@ public class PrimaryController {
             tabelaProdutos.setItems(itensCarrinho);
             tabelaProdutos.refresh();
 
-            // Atualiza os campos qtdTextField e vlrUnitTextField
+            // Atualiza os campos qtdTextField e vlrVendTextField
             atualizarCampos();
 
         } else {
@@ -262,19 +307,19 @@ public class PrimaryController {
             mostrarValoresLinhaSelecionada();
     }
 
-    // Método para atualizar os campos qtdTextField e vlrUnitTextField
+    // Método para atualizar os campos qtdTextField e vlrVendTextField
     private void atualizarCampos() {
         // Obtém o item selecionado na tabela
         ItemCarrinho itemSelecionado = tabelaProdutos.getSelectionModel().getSelectedItem();
 
         if (itemSelecionado != null) {
             // Preenche os TextFields com os valores do item selecionado
-            vlrUnitTextField.setText(NumberFormat.getCurrencyInstance(Locale.forLanguageTag("pt-BR"))
+            vlrVendTextField.setText(NumberFormat.getCurrencyInstance(Locale.forLanguageTag("pt-BR"))
                     .format(itemSelecionado.getProduto().getValorProduto()));
             qtdTextField.setText(String.valueOf(itemSelecionado.getQuantidade()));
         } else {
             // Se nenhum item estiver selecionado, limpa os TextFields
-            vlrUnitTextField.clear();
+            vlrVendTextField.clear();
             qtdTextField.clear();
         }
     }
@@ -285,7 +330,7 @@ public class PrimaryController {
 
         if (itemSelecionado != null) {
             // Preenche os TextFields com os valores da linha selecionada
-            vlrUnitTextField.setText(NumberFormat.getCurrencyInstance(Locale.forLanguageTag("pt-BR"))
+            vlrVendTextField.setText(NumberFormat.getCurrencyInstance(Locale.forLanguageTag("pt-BR"))
                     .format(itemSelecionado.getProduto().getValorProduto()));
             qtdTextField.setText(String.valueOf(itemSelecionado.getQuantidade()));
         }
@@ -295,8 +340,7 @@ public class PrimaryController {
         Produto produto = produtoDAO.getByCodBarras(codBarras);
 
         if (produto != null) {
-            // Verifica se o produto tem desconto
-            boolean temDesconto = produtoDAO.produtoTemDesconto(Integer.parseInt(produto.getId()));
+            finalizarCupomAccordion.setDisable(false);
 
             // Verifica se o produto já está no carrinho
             Optional<ItemCarrinho> itemExistente = itensCarrinho.stream()
@@ -307,10 +351,21 @@ public class PrimaryController {
                 // Aumenta a quantidade do item no carrinho
                 ItemCarrinho itemCarrinhoExistente = itemExistente.get();
                 itemCarrinhoExistente.setQuantidade(itemCarrinhoExistente.getQuantidade() + 1);
+
+                // Aplica desconto de 12% para quantidade maior ou igual a 6
+                if (itemCarrinhoExistente.getQuantidade() >= 6 && itemCarrinhoExistente.getDesconto() == 0.0) {
+                    double percentualDesconto = 12.0;
+                    itemCarrinhoExistente.setDesconto(percentualDesconto);
+                    System.out.println("12%");
+                }
+
+                tabelaProdutos.refresh();
+
                 System.out.println("Produto existente no carrinho. Quantidade atualizada.");
             } else {
                 // Se o produto não está no carrinho, adiciona como um novo item
                 ItemCarrinho novoItem = new ItemCarrinho(produto, 1);
+
                 itensCarrinho.add(novoItem);
                 System.out.println("Novo produto adicionado ao carrinho.");
             }
@@ -318,9 +373,20 @@ public class PrimaryController {
             // Atualiza a TableView
             tabelaProdutos.setItems(itensCarrinho);
             tabelaProdutos.refresh();
+            atualizarCampos();
+
+            // Recalcula o valor total acumulado considerando todos os itens no carrinho
+            valorTotalAcumulado = itensCarrinho.stream()
+                    .mapToDouble(item -> {
+                        double percentualDesconto = descontoDAO
+                                .obterPorcentagemDesconto(Integer.parseInt(item.getProduto().getId()));
+                        double valorComDesconto = item.getProduto().getValorProduto()
+                                - (item.getProduto().getValorProduto() * (percentualDesconto / 100.0));
+                        return Math.max(valorComDesconto, 0.0) * item.getQuantidade();
+                    })
+                    .sum();
 
             // Atualiza a exibição do valor total nos TextFields
-            valorTotalAcumulado += produto.getValorProduto();
             vlrTotlTextField.setText(NumberFormat.getCurrencyInstance(Locale.forLanguageTag("pt-BR"))
                     .format(valorTotalAcumulado));
         } else {

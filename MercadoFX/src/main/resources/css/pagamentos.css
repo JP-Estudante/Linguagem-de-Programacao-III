@@ -1,0 +1,48 @@
+.checkout-values {
+    -fx-font-size: 20px;
+    /* Tamanho da fonte */
+    -fx-font-family: "Segoe UI Symbol";
+    /* Nome da fonte */
+    -fx-font-weight: bold;
+    /* Estilo da fonte (normal, bold, etc.) */
+
+}
+
+/* Estilo personalizado para os textField do caixa*/
+.checkout-values-field {
+    -fx-background-radius: 5;
+    -fx-border-color: #84A98C;
+    -fx-background-color: #52796f;
+    -fx-border-width: 1;
+    -fx-border-radius: 5;
+    -fx-padding: 5;
+    -fx-effect: innershadow(3px 3px 5px rgba(0, 0, 0, 0.1));
+}
+
+.font-collor {
+    -fx-text-fill: #fcbf49;
+}
+
+.menu-collor-solid {
+    -fx-background-color: #354F52;
+}
+
+.menu-collor-light {
+    -fx-background-color: #52796f;
+}
+
+.button {
+    -fx-background-radius: 5;
+    -fx-border-width: 1;
+    -fx-padding: 10 20;
+    -fx-font-family: "Segoe UI Symbol";
+    -fx-font-size: 24px;
+}
+
+/* Estilo para botões quando o mouse passa por cima deles */
+.button:hover {
+    -fx-background-color: #84a98c;
+    /* Altere a cor de fundo quando o mouse passa por cima */
+    -fx-text-fill: #354f52;
+    /* Altere a cor do texto quando o mouse passa por cima */
+}

@@ -52,13 +52,13 @@
          <children>
             <VBox layoutY="37.0" prefHeight="269.0" prefWidth="277.0">
                <children>
-                  <Accordion disable="true" style="-fx-background-color: #52796f;">
+                  <Accordion fx:id="finalizarCupomAccordion" disable="true" style="-fx-background-color: #52796f;">
                     <panes>
                       <TitledPane disable="true" text="Finalizar Cupom">
                            <content>
                               <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #52796f;">
                                  <children>
-                                    <Button mnemonicParsing="false" onAction="#limparCupomOnClicked" prefHeight="55.0" prefWidth="307.0" text="Dinheiro" textAlignment="JUSTIFY">
+                                    <Button mnemonicParsing="false" onAction="#pagarEmDinheiro" prefHeight="55.0" prefWidth="307.0" text="Dinheiro" textAlignment="JUSTIFY">
                                        <styleClass>
                                           <String fx:value="menu-collor-light" />
                                           <String fx:value="font-collor" />
@@ -74,7 +74,7 @@
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
                                     </Button>
-                                    <Button mnemonicParsing="false" onAction="#limparCupomOnClicked" prefHeight="55.0" prefWidth="307.0" text="Cartão" textAlignment="JUSTIFY">
+                                    <Button mnemonicParsing="false" prefHeight="55.0" prefWidth="307.0" text="Cartão" textAlignment="JUSTIFY">
                                        <styleClass>
                                           <String fx:value="menu-collor-light" />
                                           <String fx:value="font-collor" />
@@ -90,7 +90,7 @@
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
                                     </Button>
-                                    <Button mnemonicParsing="false" onAction="#limparCupomOnClicked" prefHeight="55.0" prefWidth="307.0" text="Pix" textAlignment="JUSTIFY">
+                                    <Button mnemonicParsing="false" prefHeight="55.0" prefWidth="307.0" text="Pix" textAlignment="JUSTIFY">
                                        <styleClass>
                                           <String fx:value="menu-collor-light" />
                                           <String fx:value="font-collor" />
@@ -183,7 +183,7 @@
                   <RowConstraints maxHeight="187.0" minHeight="10.0" prefHeight="81.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Label text="Valor Unt.:" GridPane.rowIndex="1">
+                  <Label text="Valor Venda:" GridPane.rowIndex="1">
                      <styleClass>
                         <String fx:value="checkout-values" />
                         <String fx:value="font-collor" />
@@ -221,7 +221,7 @@
                         <Insets right="35.0" />
                      </GridPane.margin>
                   </TextField>
-                  <TextField fx:id="vlrUnitTextField" disable="true" editable="false" prefHeight="43.0" prefWidth="125.0" promptText="💸" style="-fx-opacity: 1;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <TextField fx:id="vlrVendTextField" disable="true" editable="false" prefHeight="43.0" prefWidth="125.0" promptText="💸" style="-fx-opacity: 1;" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <styleClass>
                         <String fx:value="checkout-values" />
                         <String fx:value="checkout-values-field" />

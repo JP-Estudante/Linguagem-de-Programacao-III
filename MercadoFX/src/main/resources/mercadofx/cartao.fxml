@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Text?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="470.0" prefWidth="360.0" styleClass="menu-collor-solid" stylesheets="@../css/pagamentos.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mercadofx.CartaoController">
+   <children>
+      <Label layoutX="56.0" layoutY="126.0" text="Vlr. Total:">
+         <styleClass>
+            <String fx:value="font-collor" />
+            <String fx:value="checkout-values" />
+         </styleClass>
+      </Label>
+      <Label layoutX="56.0" layoutY="191.0" text="Vlr. Final:">
+         <styleClass>
+            <String fx:value="font-collor" />
+            <String fx:value="checkout-values" />
+         </styleClass>
+      </Label>
+      <Text layoutX="23.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: Impact; -fx-fill: #fcbf49; -fx-font-size: 30;" text="Cartão" />
+      <TextField fx:id="cupomTextField" layoutX="114.0" layoutY="345.0" prefHeight="39.0" prefWidth="222.0">
+         <styleClass>
+            <String fx:value="checkout-values" />
+            <String fx:value="checkout-values-field" />
+         </styleClass>
+      </TextField>
+      <Label layoutX="33.0" layoutY="349.0" text="Cupom:">
+         <styleClass>
+            <String fx:value="font-collor" />
+            <String fx:value="checkout-values" />
+         </styleClass>
+      </Label>
+      <TextField fx:id="valorTotalTextField" disable="true" layoutX="147.0" layoutY="122.0" prefHeight="16.0" prefWidth="135.0" style="-fx-opacity: 1;">
+         <styleClass>
+            <String fx:value="checkout-values" />
+            <String fx:value="checkout-values-field" />
+         </styleClass>
+      </TextField>
+      <TextField fx:id="valorFinalTextField" disable="true" layoutX="147.0" layoutY="185.0" prefHeight="39.0" prefWidth="135.0" style="-fx-opacity: 1;">
+         <styleClass>
+            <String fx:value="checkout-values" />
+            <String fx:value="checkout-values-field" />
+         </styleClass>
+      </TextField>
+      <Button disable="true" layoutX="117.0" layoutY="406.0" mnemonicParsing="false" onAction="#finalizarCupom" text="Finalizar">
+         <styleClass>
+            <String fx:value="font-collor" />
+            <String fx:value="menu-collor-solid" />
+         </styleClass>
+      </Button>
+      <ImageView fitHeight="71.0" fitWidth="54.0" layoutX="292.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../icons/card-icon.png" />
+         </image>
+      </ImageView>
+   </children>
+</Pane>
