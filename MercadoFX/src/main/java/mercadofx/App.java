@@ -27,7 +27,8 @@ public class App extends Application {
 
     public void start(Stage stage) throws IOException {
         primaryStage = stage;
-        scene = new Scene(loadFXML("primary"), 1920, 1080);
+        // scene = new Scene(loadFXML("primary"), 1920, 1080);
+        scene = new Scene(loadFXML("if_interface"), 1920, 1080);
 
         // Carregando um arquivo CSS
         scene.getStylesheets().add(getClass().getResource("table-view.css").toExternalForm());

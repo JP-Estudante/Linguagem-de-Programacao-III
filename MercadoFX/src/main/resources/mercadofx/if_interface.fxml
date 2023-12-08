@@ -54,7 +54,7 @@
                <children>
                   <Accordion fx:id="finalizarCupomAccordion" disable="true" style="-fx-background-color: #52796f;">
                     <panes>
-                      <TitledPane disable="true" text="Finalizar Cupom">
+                      <TitledPane text="Finalizar Cupom" translateX="-10.0">
                            <content>
                               <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #52796f;">
                                  <children>
@@ -74,7 +74,7 @@
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
                                     </Button>
-                                    <Button mnemonicParsing="false" prefHeight="55.0" prefWidth="307.0" text="Cartão" textAlignment="JUSTIFY">
+                                    <Button mnemonicParsing="false" onAction="#pagarComCartao" prefHeight="55.0" prefWidth="307.0" text="Cartão" textAlignment="JUSTIFY">
                                        <styleClass>
                                           <String fx:value="menu-collor-light" />
                                           <String fx:value="font-collor" />
@@ -110,7 +110,7 @@
                               </VBox>
                            </content>
                            <graphic>
-                              <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" translateX="-5.0">
                                  <image>
                                     <Image url="@../icons/finish-icon.png" />
                                  </image>
@@ -126,13 +126,13 @@
                         </TitledPane>
                     </panes>
                   </Accordion>
-                  <Button mnemonicParsing="false" onAction="#limparCupomOnClicked" prefHeight="55.0" prefWidth="307.0" text="Limpar Cupom" textAlignment="JUSTIFY" translateX="-1.0">
+                  <Button mnemonicParsing="false" onAction="#limparCupomOnClicked" prefHeight="55.0" prefWidth="307.0" text="Limpar Cupom" textAlignment="JUSTIFY" translateX="1.0">
                      <styleClass>
                         <String fx:value="menu-collor-light" />
                         <String fx:value="font-collor" />
                      </styleClass>
                      <graphic>
-                        <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" translateX="-9.0">
+                        <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" translateX="-12.0">
                            <image>
                               <Image url="@../icons/clear-cart.png" />
                            </image>
